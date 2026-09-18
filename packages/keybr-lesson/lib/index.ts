@@ -1,3 +1,4 @@
+export * from "./adaptive.ts";
 export * from "./books.ts";
 export * from "./code.ts";
 export * from "./customtext.ts";

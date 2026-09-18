@@ -1,6 +1,7 @@
 import { keyboardProps, type KeyId } from "@keybr/keyboard";
 import {
   type DailyGoal,
+  GuidedLesson,
   Lesson,
   type LessonKeys,
   lessonProps,
@@ -25,6 +26,10 @@ import {
 } from "@keybr/textinput";
 import { type IInputEvent } from "@keybr/textinput-events";
 import { type CodePoint } from "@keybr/unicode";
+import {
+  loadAdaptivePractice,
+  saveAdaptivePractice,
+} from "./adaptive-storage.ts";
 import { type LastLesson } from "./last-lesson.ts";
 import { type Progress } from "./progress.ts";
 
@@ -61,6 +66,9 @@ export class LessonState {
     this.streakList = progress.streakList.copy();
     this.dailyGoal = progress.dailyGoal.copy();
     this.lessonKeys = this.lesson.update(this.keyStatsMap);
+    if (this.lesson instanceof GuidedLesson) {
+      this.lesson.adaptivePractice = loadAdaptivePractice(this.settings);
+    }
     this.#reset(this.lesson.generate(this.lessonKeys, Lesson.rng));
   }
 
@@ -77,7 +85,22 @@ export class LessonState {
     this.lines = this.textInput.lines;
     this.suffix = this.textInput.remaining.map(({ codePoint }) => codePoint);
     if (this.textInput.completed) {
-      this.#onResult(this.#makeResult(), this.textInput);
+      const result = this.#makeResult();
+      if (
+        result.validate() &&
+        this.lesson instanceof GuidedLesson &&
+        this.settings.get(lessonProps.guided.adaptivePractice)
+      ) {
+        this.lesson.adaptivePractice.record(
+          this.textInput.steps.map((step, index) => ({
+            ...step,
+            codePoint: this.textInput.at(index).codePoint,
+          })),
+          60000 / this.settings.get(lessonProps.targetSpeed),
+        );
+        saveAdaptivePractice(this.settings, this.lesson.adaptivePractice);
+      }
+      this.#onResult(result, this.textInput);
     }
     return feedback;
   }

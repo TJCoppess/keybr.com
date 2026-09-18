@@ -1,13 +1,59 @@
 import { describe, it, test } from "node:test";
 import { Layout, loadKeyboard } from "@keybr/keyboard";
-import { FakePhoneticModel } from "@keybr/phonetic-model";
+import { FakePhoneticModel, type Filter } from "@keybr/phonetic-model";
 import { makeKeyStatsMap } from "@keybr/result";
 import { Settings } from "@keybr/settings";
-import { deepEqual, equal } from "rich-assert";
+import { deepEqual, equal, includes } from "rich-assert";
 import { fakeKeyStatsMap, printLessonKeys } from "./fakes.ts";
 import { GuidedLesson } from "./guided.ts";
 import { LessonKey } from "./key.ts";
 import { lessonProps } from "./settings.ts";
+
+test("adaptive review mixes combinations into guided lessons without changing unlocks", () => {
+  class ReviewModel extends FakePhoneticModel {
+    override nextWord(filter: Filter): string {
+      return filter.focusedCodePoint == null ? "bcd" : "aaa";
+    }
+  }
+  for (const naturalWords of [false, true]) {
+    const settings = new Settings().set(
+      lessonProps.guided.naturalWords,
+      naturalWords,
+    );
+    const model = new ReviewModel();
+    const lesson = new GuidedLesson(
+      settings,
+      loadKeyboard(Layout.EN_US),
+      model,
+      [],
+    );
+    const keys = lesson.update(makeKeyStatsMap(lesson.letters, []));
+    const before = printLessonKeys(keys);
+    const baseline = lesson.generate(keys, model.rng);
+    lesson.adaptivePractice.record(
+      [..."bcd bcd bcd"].map((c, index) => ({
+        codePoint: c.codePointAt(0)!,
+        timeStamp: index * 100,
+        timeToType: 100,
+        typo: c === "c",
+      })),
+      200,
+    );
+    includes(String(lesson.generate(keys, model.rng)), "bcd");
+    equal(
+      printLessonKeys(lesson.update(makeKeyStatsMap(lesson.letters, []))),
+      before,
+    );
+    const disabled = new GuidedLesson(
+      settings.set(lessonProps.guided.adaptivePractice, false),
+      loadKeyboard(Layout.EN_US),
+      model,
+      [],
+    );
+    disabled.adaptivePractice = lesson.adaptivePractice;
+    equal(disabled.generate(keys, model.rng), baseline);
+  }
+});
 
 test("provide key set", () => {
   const settings = new Settings();

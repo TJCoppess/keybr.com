@@ -13,6 +13,7 @@ export const lessonProps = {
   type: itemProp("lesson.type", LessonType.ALL, LessonType.GUIDED),
   length: numberProp("lesson.length", 0, { min: 0, max: 1 }),
   guided: {
+    adaptivePractice: booleanProp("lesson.guided.adaptivePractice", true),
     naturalWords: booleanProp("lesson.guided.naturalWords", true),
     keyboardOrder: booleanProp("lesson.guided.keyboardOrder", false),
     alphabetSize: numberProp("lesson.guided.alphabetSize", 0, {

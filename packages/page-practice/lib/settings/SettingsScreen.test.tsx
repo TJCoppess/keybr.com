@@ -32,6 +32,11 @@ test("render", async () => {
 
   isNotNull(r.queryByText("Lesson options"));
   isNotNull(r.queryByText("Lesson preview"));
+  const adaptiveReview = r.getByRole("checkbox", {
+    name: "Mix in adaptive review",
+  });
+  fireEvent.click(adaptiveReview);
+  fireEvent.click(adaptiveReview);
 
   fireEvent.click(r.getByText("Typing"));
 

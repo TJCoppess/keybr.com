@@ -4,6 +4,7 @@ import { Filter, Letter, type PhoneticModel } from "@keybr/phonetic-model";
 import { type RNGStream } from "@keybr/rand";
 import { type KeyStatsMap } from "@keybr/result";
 import { type Settings } from "@keybr/settings";
+import { AdaptivePractice, adaptiveWords } from "./adaptive.ts";
 import { Dictionary, filterWordList } from "./dictionary.ts";
 import { LessonKey, LessonKeys } from "./key.ts";
 import { Lesson } from "./lesson.ts";
@@ -19,6 +20,7 @@ import {
 
 export class GuidedLesson extends Lesson {
   readonly dictionary: Dictionary;
+  adaptivePractice = new AdaptivePractice();
 
   constructor(
     settings: Settings,
@@ -112,7 +114,26 @@ export class GuidedLesson extends Lesson {
       lessonKeys.findIncludedKeys(),
       lessonKeys.findFocusedKey(),
     );
-    const wordGenerator = this.#makeWordGenerator(filter, rng);
+    const normal = this.#makeWordGenerator(filter, rng);
+    const targets = this.settings.get(lessonProps.guided.adaptivePractice)
+      ? this.adaptivePractice.targets(
+          new Set(
+            lessonKeys.findIncludedKeys().map(({ letter }) => letter.codePoint),
+          ),
+          60000 / this.settings.get(lessonProps.targetSpeed),
+        )
+      : [];
+    const wordGenerator =
+      targets.length === 0
+        ? normal
+        : adaptiveWords(
+            normal,
+            this.#makeWordGenerator(
+              new Filter(lessonKeys.findIncludedKeys()),
+              rng,
+            ),
+            targets,
+          );
     const words = mangledWords(
       uniqueWords(wordGenerator),
       this.model.language,
