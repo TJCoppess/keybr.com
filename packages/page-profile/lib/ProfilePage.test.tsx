@@ -30,6 +30,7 @@ test("render", async () => {
 
   isNotNull(await r.findByText("Typing Speed"));
   isNotNull(await r.findByText("Key Typing Speed"));
+  isNotNull(await r.findByText("Key Combinations"));
 
   r.unmount();
 });

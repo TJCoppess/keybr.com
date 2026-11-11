@@ -1,15 +1,17 @@
 import type { Step } from "@keybr/textinput";
 import type { WordGenerator } from "./text/words.ts";
 
-type Pattern = {
-  text: string;
-  samples: number;
-  time: number;
-  errors: number;
-  streak: number;
-  due: number;
-  dueAt: number;
+export type AdaptivePattern = {
+  readonly text: string;
+  readonly samples: number;
+  readonly time: number;
+  readonly errors: number;
+  readonly streak: number;
+  readonly due: number;
+  readonly dueAt: number;
 };
+
+type Pattern = AdaptivePattern;
 
 const day = 86_400_000;
 
@@ -17,6 +19,14 @@ const day = 86_400_000;
 export class AdaptivePractice {
   #lesson = 0;
   #patterns = new Map<string, Pattern>();
+
+  get patterns(): readonly AdaptivePattern[] {
+    return [...this.#patterns.values()];
+  }
+
+  get lesson(): number {
+    return this.#lesson;
+  }
 
   static restore(json: string | null): AdaptivePractice {
     const history = new AdaptivePractice();

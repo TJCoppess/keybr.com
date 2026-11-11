@@ -1,0 +1,140 @@
+@import "@keybr/widget/lib/index.less";
+
+.statisticList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-block-end: 1.5rem;
+}
+
+.statisticListItem {
+  flex: 1 1 12rem;
+  padding-inline: 1rem;
+  padding-block: 0.75rem;
+  border: var(--separator-border);
+  border-radius: 0.5rem;
+}
+
+.itemName {
+  display: block;
+  color: var(--Name-color);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.itemValue {
+  display: block;
+  color: var(--Value-color);
+  font-family: var(--value-font-family);
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.controls {
+  margin-block: 1rem;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  margin-block-start: 1rem;
+
+  th {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--Name-color);
+  }
+
+  td,
+  th {
+    padding-inline: 0.75rem;
+    padding-block: 0.5rem;
+    border-block-end: var(--separator-border);
+    text-align: start;
+    vertical-align: middle;
+  }
+}
+
+.patternCol {
+  text-align: start;
+  inline-size: 18%;
+}
+
+.speedCol {
+  text-align: end;
+  inline-size: 16%;
+}
+
+.errorsCol {
+  text-align: end;
+  inline-size: 16%;
+}
+
+.samplesCol {
+  text-align: end;
+  inline-size: 16%;
+}
+
+.streakCol {
+  text-align: center;
+  inline-size: 18%;
+}
+
+.dueCol {
+  text-align: end;
+  inline-size: 16%;
+}
+
+.comboBadge {
+  display: inline-block;
+  padding-inline: 0.6rem;
+  padding-block: 0.2rem;
+  font-family: var(--code-font-family, monospace);
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  border-radius: 0.35rem;
+  border: 1px solid currentColor;
+  opacity: 0.9;
+}
+
+.streakDots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dot {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--button-ghost-color, #777);
+  opacity: 0.3;
+}
+
+.dotActive {
+  background: #388e3c;
+  opacity: 1;
+}
+
+.badgeMastered {
+  color: #388e3c;
+  font-weight: 600;
+}
+
+.badgeLearning {
+  color: #1976d2;
+}
+
+.badgeDue {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+.pagination {
+  margin-block-start: 1rem;
+  text-align: center;
+}

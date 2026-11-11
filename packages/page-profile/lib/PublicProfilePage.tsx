@@ -1,3 +1,4 @@
+import { useKeyboard } from "@keybr/keyboard";
 import { type NamedUser, Screen, UserName } from "@keybr/pages-shared";
 import {
   DailyStatsMap,
@@ -10,6 +11,7 @@ import { CalendarSection } from "./profile/CalendarSection.tsx";
 import { DataScript } from "./profile/DataScript.tsx";
 import { ExplainProfile } from "./profile/ExplainProfile.tsx";
 import { HistogramsSection } from "./profile/HistogramsSection.tsx";
+import { KeyCombosSection } from "./profile/KeyCombosSection.tsx";
 import { KeyFrequencyHeatmapSection } from "./profile/KeyFrequencyHeatmapSection.tsx";
 import { KeyFrequencyHistogramSection } from "./profile/KeyFrequencyHistogramSection.tsx";
 import { KeySpeedChartSection } from "./profile/KeySpeedChartSection.tsx";
@@ -36,6 +38,7 @@ export function PublicProfilePage({ user }: { user: NamedUser }) {
 }
 
 function Content({ keyStatsMap }: { keyStatsMap: KeyStatsMap }) {
+  const keyboard = useKeyboard();
   const { results } = keyStatsMap;
   const stats = makeSummaryStats(results);
   const dailyStatsMap = new DailyStatsMap(results);
@@ -63,6 +66,8 @@ function Content({ keyStatsMap }: { keyStatsMap: KeyStatsMap }) {
       <KeyFrequencyHistogramSection keyStatsMap={keyStatsMap} />
 
       <KeyFrequencyHeatmapSection keyStatsMap={keyStatsMap} />
+
+      <KeyCombosSection layout={keyboard.layout} />
 
       <CalendarSection dailyStatsMap={dailyStatsMap} />
     </>

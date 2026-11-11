@@ -15,7 +15,11 @@ function steps(text = "thin thin thin", typo = false, time = 100): Step[] {
 
 test("mistakes receive immediate practice and a delayed check after success", () => {
   const history = new AdaptivePractice();
+  equal(history.lesson, 0);
+  equal(history.patterns.length, 0);
   history.record(steps(undefined, true), 200, 0);
+  equal(history.lesson, 1);
+  ok(history.patterns.some((p) => p.text === "th" && p.errors > 0));
   ok(history.targets(allowed, 200, 0).includes("th"));
   history.record(steps(), 200, 1);
   equal(history.targets(allowed, 200, 1).length, 0);
