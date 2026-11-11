@@ -1,6 +1,7 @@
 import { type KeyId, useKeyboard } from "@keybr/keyboard";
+import { openKeystrokeLog, toLoggedLesson } from "@keybr/lesson-ui";
 import { type Result } from "@keybr/result";
-import { type LineList } from "@keybr/textinput";
+import { type LineList, type TextInput } from "@keybr/textinput";
 import { addKey, deleteKey, emulateLayout } from "@keybr/textinput-events";
 import { makeSoundPlayer } from "@keybr/textinput-sounds";
 import {
@@ -79,6 +80,7 @@ function useLessonState(
       (result, textInput) => {
         setKey(key + 1);
         lastLessonRef.current = makeLastLesson(result, textInput.steps);
+        logKeystrokes(result, textInput);
         onResultRef.current(result);
       },
       adaptiveStorage,
@@ -131,4 +133,27 @@ function useLessonState(
       handleInput: onInput,
     };
   }, [progress, keyboard, timeout, key, adaptiveStorage]);
+}
+
+/** Keeps every key of a completed lesson in the browser, see the log. */
+function logKeystrokes(result: Result, textInput: TextInput) {
+  if (result.validate()) {
+    openKeystrokeLog()
+      ?.append(
+        toLoggedLesson(
+          result.layout.id,
+          result.textType.id,
+          result.timeStamp,
+          // Log the expected characters, not their typed variants.
+          textInput.steps.map((step, index) => ({
+            ...step,
+            codePoint: textInput.at(index).codePoint,
+          })),
+          textInput.confusions,
+        ),
+      )
+      .catch(() => {
+        // The log is optional, practice goes on without it.
+      });
+  }
 }

@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import { FakeIntlProvider } from "@keybr/intl";
 import { Layout } from "@keybr/keyboard";
+import { openKeystrokeLog, toLoggedLesson } from "@keybr/lesson-ui";
 import { PageDataContext } from "@keybr/pages-shared";
 import { FakeSettingsContext } from "@keybr/settings";
 import { render } from "@testing-library/react";
@@ -207,5 +208,28 @@ test("shows words, confused letters and the speed gain", async () => {
   equal(r.queryByText("there"), null);
 
   localStorage.removeItem(key);
+  r.unmount();
+});
+
+test("shows the size of the keystroke log", async () => {
+  const layout = Layout.ALL.get("en-us")!;
+  const log = openKeystrokeLog()!;
+  await log.clear();
+  await log.append(toLoggedLesson(layout.id, "generated", 1, [], []));
+  await log.append(toLoggedLesson(layout.id, "generated", 2, [], []));
+
+  const r = render(
+    <FakeIntlProvider>
+      <PageDataContext.Provider value={{ publicUser: { id: null } } as any}>
+        <FakeSettingsContext>
+          <KeyCombosSection layout={layout} />
+        </FakeSettingsContext>
+      </PageDataContext.Provider>
+    </FakeIntlProvider>,
+  );
+
+  isNotNull(await r.findByText(/Keystroke log: 2 lessons in this browser/));
+
+  await log.clear();
   r.unmount();
 });

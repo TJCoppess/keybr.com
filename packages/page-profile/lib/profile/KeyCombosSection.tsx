@@ -15,6 +15,7 @@ import {
 import { type ReactNode, useMemo, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import * as styles from "./KeyCombosSection.module.less";
+import { KeystrokeLogControls } from "./KeystrokeLogControls.tsx";
 import { useAdaptivePatterns } from "./use-adaptive-patterns.ts";
 
 export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
@@ -451,6 +452,8 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
           />
         </Para>
       )}
+
+      <KeystrokeLogControls />
     </Figure>
   );
 }

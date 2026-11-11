@@ -12,5 +12,6 @@ export * from "./KeyLegend.tsx";
 export * from "./KeyLegendList.tsx";
 export * from "./KeySelector.tsx";
 export * from "./KeySet.tsx";
+export * from "./keystroke-log.ts";
 export * from "./names.ts";
 export * from "./styles.ts";
