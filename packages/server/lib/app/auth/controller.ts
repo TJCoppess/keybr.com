@@ -20,6 +20,7 @@ import { type AbstractAdapter } from "@keybr/oauth";
 import { z } from "zod";
 import { Mailer } from "../mail/index.ts";
 import { messageWithLink } from "./email.ts";
+import { localProfileEnabled } from "./local-profile.ts";
 import { pAdapter } from "./pipe.ts";
 import { type AuthState } from "./types.ts";
 import { zod } from "./zod.ts";
@@ -49,6 +50,27 @@ export class Controller {
     @inject("canonicalUrl") readonly canonicalUrl: string,
     readonly mailer: Mailer,
   ) {}
+
+  @http.POST("/auth/login/local")
+  async loginLocal(ctx: Context<RouterState & SessionState & AuthState>) {
+    const origin = ctx.request.headers.get("Origin");
+    const canonicalOrigin = new URL(this.canonicalUrl).origin;
+    const reqOrigin = ctx.request.origin;
+    const isSameOrigin =
+      origin != null && (origin === canonicalOrigin || origin === reqOrigin);
+
+    if (!localProfileEnabled(ctx, this.canonicalUrl) || !isSameOrigin) {
+      throw new ForbiddenError(
+        "Local profile is only available on this computer",
+      );
+    }
+    // Reuse the development account, including any progress already saved to it.
+    const user = await User.login("user@localhost");
+    ctx.state.session.destroy();
+    ctx.state.session.start();
+    ctx.state.session.set("userId", user.id!);
+    ctx.response.redirect("/account", 303);
+  }
 
   @http.GET({ name: "oauth-init", path: "/auth/oauth-init/{adapter}" })
   async oAuthInit(

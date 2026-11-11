@@ -1,4 +1,4 @@
-import { Article, Header } from "@keybr/widget";
+import { Article, Button, Header, Para } from "@keybr/widget";
 import { FormattedMessage } from "react-intl";
 import { AccountName } from "./AccountName.tsx";
 import { AccountPricePreview } from "./AccountPricePreview.tsx";
@@ -6,7 +6,32 @@ import { type SignInActions } from "./actions.ts";
 import { EmailLoginForm } from "./EmailLoginForm.tsx";
 import { OAuthLoginForm } from "./OAuthLoginForm.tsx";
 
-export function SignInSection({ actions }: { actions: SignInActions }) {
+export function SignInSection({
+  actions,
+  localProfile = false,
+}: {
+  actions: SignInActions;
+  localProfile?: boolean;
+}) {
+  if (localProfile) {
+    return (
+      <Article>
+        <Header level={1}>Local profile</Header>
+        <Para>
+          Save your typing progress, settings, and adaptive history on this
+          computer. No Google account, email, password, or internet connection
+          is needed.
+        </Para>
+        <Para>
+          This is one shared profile for people using this computer. Your data
+          stays on this local server and is separate from keybr.com.
+        </Para>
+        <form method="post" action="/auth/login/local">
+          <Button label="Use local profile" />
+        </form>
+      </Article>
+    );
+  }
   return (
     <Article>
       <AccountName user={null} />

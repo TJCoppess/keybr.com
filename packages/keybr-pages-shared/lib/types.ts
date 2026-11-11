@@ -1,6 +1,7 @@
 import { type LocaleId } from "@keybr/intl";
 
 export type PageData = {
+  readonly localProfile?: boolean;
   /**
    * Base URL.
    */
