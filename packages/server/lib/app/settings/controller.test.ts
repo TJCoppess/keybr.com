@@ -14,7 +14,7 @@ test("adaptive history requires login and is isolated by account and layout", as
   const request = startApp(context.get(Application, kMain));
   const path = "/_/sync/adaptive/en-colemak-dh";
   const history = {
-    version: 1,
+    version: 2,
     lesson: 3,
     patterns: [
       {
@@ -22,6 +22,7 @@ test("adaptive history requires login and is isolated by account and layout", as
         samples: 4,
         time: 120,
         errors: 1,
+        errorRate: 0.25,
         streak: 0,
         due: 4,
         dueAt: 1000,
@@ -46,6 +47,44 @@ test("adaptive history requires login and is isolated by account and layout", as
   );
   await request.become("user1@keybr.com");
   deepEqual(await (await request.GET(path).send()).body.json(), history);
+});
+
+test("adaptive history is validated and converted to the current version", async () => {
+  const request = startApp(context.get(Application, kMain));
+  const path = "/_/sync/adaptive/en-dvorak";
+  await request.become("user1@keybr.com");
+  for (const invalid of [
+    [],
+    { version: 3, lesson: 1, patterns: [] },
+    { version: 2, lesson: 1.5, patterns: [] },
+    { version: 2, lesson: 1 },
+  ]) {
+    equal((await request.PUT(path).send(invalid)).status, 400);
+  }
+  const pattern = { samples: 4, time: 120, streak: 0, due: 4, dueAt: 1000 };
+  equal(
+    (
+      await request.PUT(path).send({
+        version: 1,
+        lesson: 3,
+        patterns: [
+          { ...pattern, text: "t", errors: 0 },
+          { ...pattern, text: "th", errors: 2, extra: "dropped" },
+          { ...pattern, text: "he", errors: -1 },
+          { ...pattern, text: "in", errors: 0 },
+        ],
+      })
+    ).status,
+    204,
+  );
+  deepEqual(await (await request.GET(path).send()).body.json(), {
+    version: 2,
+    lesson: 3,
+    patterns: [
+      { ...pattern, text: "th", errors: 2, errorRate: 1 },
+      { ...pattern, text: "in", errors: 0, errorRate: 0 },
+    ],
+  });
 });
 
 test("handle unauthenticated user", async () => {

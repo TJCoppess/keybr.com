@@ -9,6 +9,7 @@
     "@keybr/database": "*",
     "@keybr/highscores": "*",
     "@keybr/intl": "*",
+    "@keybr/lesson": "*",
     "@keybr/logger": "*",
     "@keybr/multiplayer-server": "*",
     "@keybr/multiplayer-shared": "*",

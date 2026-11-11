@@ -30,7 +30,7 @@ test("adaptive review mixes combinations into guided lessons without changing un
     const keys = lesson.update(makeKeyStatsMap(lesson.letters, []));
     const before = printLessonKeys(keys);
     const baseline = lesson.generate(keys, model.rng);
-    lesson.adaptivePractice.record(
+    lesson.adaptivePractice!.record(
       [..."bcd bcd bcd"].map((c, index) => ({
         codePoint: c.codePointAt(0)!,
         timeStamp: index * 100,
@@ -50,9 +50,46 @@ test("adaptive review mixes combinations into guided lessons without changing un
       model,
       [],
     );
-    disabled.adaptivePractice = lesson.adaptivePractice;
+    equal(disabled.adaptivePractice, null);
     equal(disabled.generate(keys, model.rng), baseline);
   }
+});
+
+test("adaptive review looks up natural words with the combination", () => {
+  // Many words with the focused letter, and a single word with the targets.
+  const words = [];
+  for (const x of "cdfghij") {
+    for (const y of "cdfghij") {
+      words.push(`a${x}${y}`, `${x}a${y}`, `${x}${y}a`);
+    }
+  }
+  words.push("ebb");
+  const model = new FakePhoneticModel(["abc"]);
+  const lesson = new GuidedLesson(
+    new Settings()
+      .set(lessonProps.guided.naturalWords, true)
+      .set(lessonProps.guided.alphabetSize, 1),
+    loadKeyboard(Layout.EN_US),
+    model,
+    words,
+  );
+  const keys = lesson.update(makeKeyStatsMap(lesson.letters, []));
+  equal(keys.findFocusedKey()?.letter, FakePhoneticModel.letter1);
+  lesson.adaptivePractice!.record(
+    [..."ebb ebb ebb"].map((c, index) => ({
+      codePoint: c.codePointAt(0)!,
+      timeStamp: index * 100,
+      timeToType: 100,
+      typo: c === "b",
+    })),
+    200,
+  );
+  // Drawing random words would find the single matching word rarely.
+  // Looking it up finds it for every fourth selection.
+  const text = String(lesson.generate(keys, model.rng)).split(" ");
+  const found = text.filter((word) => word === "ebb");
+  equal(found.length >= Math.floor(text.length / 4), true);
+  equal(found.length >= 4, true);
 });
 
 test("provide key set", () => {

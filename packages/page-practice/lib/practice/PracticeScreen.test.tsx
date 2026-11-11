@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import { FakeIntlProvider } from "@keybr/intl";
 import { lessonProps, LessonType } from "@keybr/lesson";
-import { type PageData,PageDataContext } from "@keybr/pages-shared";
+import { type PageData, PageDataContext } from "@keybr/pages-shared";
 import { FakePhoneticModel } from "@keybr/phonetic-model";
 import { PhoneticModelLoader } from "@keybr/phonetic-model-loader";
 import { FakeResultContext, ResultFaker } from "@keybr/result";

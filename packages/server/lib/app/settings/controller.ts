@@ -3,15 +3,19 @@ import { Context } from "@fastr/core";
 import { BadRequestError } from "@fastr/errors";
 import { injectable } from "@fastr/invert";
 import { type RouterState } from "@fastr/middleware-router";
-import { DataDir } from "@keybr/config";
+import { parseAdaptiveHistory } from "@keybr/lesson/lib/adaptive-history.ts";
 import { Settings } from "@keybr/settings";
 import { SettingsDatabase } from "@keybr/settings-database";
 import { type AuthState } from "../auth/index.ts";
+import { AdaptiveStore } from "./adaptive-store.ts";
 
 @injectable()
 @controller()
 export class Controller {
-  constructor(readonly database: SettingsDatabase) {}
+  constructor(
+    readonly database: SettingsDatabase,
+    readonly adaptive: AdaptiveStore,
+  ) {}
 
   @http.GET("/_/sync/adaptive/{layout:[a-z0-9-]+}")
   async getAdaptive(
@@ -19,8 +23,8 @@ export class Controller {
     @pathParam("layout") layout: string,
   ) {
     const user = ctx.state.requireUser();
-    ctx.response.body =
-      (await this.adaptiveDatabase(layout).get(user.id!))?.toJSON() ?? {};
+    checkLayout(layout);
+    ctx.response.body = (await this.adaptive.get(user.id!, layout)) ?? {};
     ctx.response.headers.set("Cache-Control", "private, no-cache");
   }
 
@@ -28,52 +32,16 @@ export class Controller {
   async putAdaptive(
     ctx: Context<RouterState & AuthState>,
     @pathParam("layout") layout: string,
-    @body.json(null, { maxLength: 262144 }) value: any,
+    @body.json(null, { maxLength: 262144 }) value: unknown,
   ) {
     const user = ctx.state.requireUser();
-    if (
-      value?.version !== 1 ||
-      !Number.isSafeInteger(value.lesson) ||
-      value.lesson < 0 ||
-      !Array.isArray(value.patterns) ||
-      value.patterns.length > 1000 ||
-      !value.patterns.every(
-        (p: any) =>
-          p != null &&
-          typeof p.text === "string" &&
-          /^\p{L}{1,3}$/u.test(p.text) &&
-          [p.samples, p.time, p.errors, p.streak, p.due, p.dueAt].every(
-            (n) => typeof n === "number" && Number.isFinite(n) && n >= 0,
-          ),
-      )
-    ) {
+    checkLayout(layout);
+    const history = parseAdaptiveHistory(value);
+    if (history == null) {
       throw new BadRequestError("Invalid adaptive history");
     }
-    const patterns = value.patterns.map(
-      ({ text, samples, time, errors, streak, due, dueAt }: any) => ({
-        text,
-        samples,
-        time,
-        errors,
-        streak,
-        due,
-        dueAt,
-      }),
-    );
-    await this.adaptiveDatabase(layout).set(
-      user.id!,
-      new Settings({ version: 1, lesson: value.lesson, patterns }),
-    );
+    await this.adaptive.set(user.id!, layout, history);
     ctx.response.status = 204;
-  }
-
-  private adaptiveDatabase(layout: string) {
-    if (!/^[a-z0-9-]{1,80}$/.test(layout)) {
-      throw new BadRequestError("Invalid layout");
-    }
-    return new SettingsDatabase(
-      new DataDir(this.database.dataDir.dataPath("adaptive", layout)),
-    );
   }
 
   @http.GET("/_/sync/settings")
@@ -98,5 +66,12 @@ export class Controller {
     const user = ctx.state.requireUser();
     await this.database.set(user.id!, null);
     ctx.response.status = 204;
+  }
+}
+
+/** The layout id is a part of a file path. */
+function checkLayout(layout: string) {
+  if (!/^[a-z0-9-]{1,80}$/.test(layout)) {
+    throw new BadRequestError("Invalid layout");
   }
 }

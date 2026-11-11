@@ -19,9 +19,9 @@
   display: block;
   color: var(--Name-color);
   font-size: 0.85rem;
-  text-transform: uppercase;
   letter-spacing: 0.05em;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .itemValue {
@@ -38,73 +38,73 @@
 
 .table {
   inline-size: 100%;
-  border-collapse: collapse;
   margin-block-start: 1rem;
+  border-collapse: collapse;
 
   th {
-    text-transform: uppercase;
+    color: var(--Name-color);
     font-size: 0.85rem;
     letter-spacing: 0.05em;
-    color: var(--Name-color);
+    text-transform: uppercase;
   }
 
   td,
   th {
+    vertical-align: middle;
     padding-inline: 0.75rem;
     padding-block: 0.5rem;
     border-block-end: var(--separator-border);
     text-align: start;
-    vertical-align: middle;
   }
 }
 
 .patternCol {
-  text-align: start;
   inline-size: 18%;
+  text-align: start;
 }
 
 .speedCol {
-  text-align: end;
   inline-size: 16%;
+  text-align: end;
 }
 
 .errorsCol {
-  text-align: end;
   inline-size: 16%;
+  text-align: end;
 }
 
 .samplesCol {
-  text-align: end;
   inline-size: 16%;
+  text-align: end;
 }
 
 .streakCol {
-  text-align: center;
   inline-size: 18%;
+  text-align: center;
 }
 
 .dueCol {
-  text-align: end;
   inline-size: 16%;
+  text-align: end;
 }
 
 .comboBadge {
   display: inline-block;
   padding-inline: 0.6rem;
   padding-block: 0.2rem;
+  border: 1px solid currentColor;
+  border-radius: 0.35rem;
+  opacity: 0.9;
   font-family: var(--code-font-family, monospace);
   font-size: 1.1rem;
   font-weight: bold;
   letter-spacing: 0.1em;
-  border-radius: 0.35rem;
-  border: 1px solid currentColor;
-  opacity: 0.9;
 }
 
 .streakDots {
   display: inline-flex;
-  align-items: center;
   gap: 4px;
+  align-items: center;
 }
 
 .dot {

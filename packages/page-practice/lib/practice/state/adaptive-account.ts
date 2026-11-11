@@ -1,7 +1,20 @@
 import { keyboardProps } from "@keybr/keyboard";
-import { AdaptivePractice } from "@keybr/lesson";
+import {
+  adaptiveAccountStorageKey,
+  AdaptivePractice,
+  adaptiveSyncPath,
+  parseAdaptiveHistory,
+} from "@keybr/lesson";
 import { type Settings } from "@keybr/settings";
 import { loadAdaptivePractice } from "./adaptive-storage.ts";
+
+/** Tells which exchange with the server has failed. */
+export class AdaptiveSyncError extends Error {
+  constructor(readonly action: "load" | "save") {
+    super(`Cannot ${action} the adaptive history`);
+    this.name = "AdaptiveSyncError";
+  }
+}
 
 /** One account/layout per instance; queued writes cannot arrive out of order. */
 export class AdaptiveAccount {
@@ -22,9 +35,9 @@ export class AdaptiveAccount {
     },
   ) {
     const layout = settings.get(keyboardProps.layout).id;
-    this.key = `keybr.adaptive.account.v1.${userId}.${layout}`;
+    this.key = adaptiveAccountStorageKey(userId, layout);
     this.migrationKey = `keybr.adaptive.imported.v1.${layout}`;
-    this.url = `/_/sync/adaptive/${encodeURIComponent(layout)}`;
+    this.url = adaptiveSyncPath(layout);
   }
 
   async open() {
@@ -35,16 +48,15 @@ export class AdaptiveAccount {
       /* Optional cache. */
     }
     const response = await this.send(this.url);
-    if (!response.ok)
-      throw new Error(
-        "Cannot load adaptive history from your local account. Please retry.",
-      );
-    const remote = await response.json();
+    if (!response.ok) {
+      throw new AdaptiveSyncError("load");
+    }
+    const remote = parseAdaptiveHistory(await response.json());
     if (cached?.pending && typeof cached.history === "string") {
       this.history = AdaptivePractice.restore(cached.history);
       this.#pending = JSON.stringify(this.history);
-    } else if (remote?.version === 1) {
-      this.history = AdaptivePractice.restore(JSON.stringify(remote));
+    } else if (remote != null) {
+      this.history = AdaptivePractice.from(remote);
     } else {
       this.history =
         typeof cached?.history === "string"
@@ -81,10 +93,9 @@ export class AdaptiveAccount {
           headers: { "Content-Type": "application/json" },
           body: snapshot,
         });
-        if (!response.ok)
-          throw new Error(
-            "Account backup failed. Keep this page open and retry when the server is available.",
-          );
+        if (!response.ok) {
+          throw new AdaptiveSyncError("save");
+        }
         if (this.#pending === snapshot) this.#pending = null;
         this.#cache();
       });
@@ -112,8 +123,6 @@ export class AdaptiveAccount {
     } catch {
       return new AdaptivePractice();
     }
-    return AdaptivePractice.restore(
-      JSON.stringify(loadAdaptivePractice(this.settings)),
-    );
+    return AdaptivePractice.from(loadAdaptivePractice(this.settings).toJSON());
   }
 }

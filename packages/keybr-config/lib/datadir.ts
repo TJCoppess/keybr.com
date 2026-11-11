@@ -34,4 +34,22 @@ export class DataDir {
       s,
     );
   }
+
+  /**
+   * Returns the full path to a user adaptive practice history file
+   * for the given user id and keyboard layout id.
+   */
+  userAdaptiveFile(userId: number, layoutId: string): string {
+    const s = String(userId).padStart(9, "0");
+    return this.dataPath(
+      "adaptive",
+      layoutId,
+      // The histories were first kept by a settings database
+      // rooted in the layout directory, and so they stay there.
+      "user_settings",
+      s.substring(0, 3),
+      s.substring(3, 6),
+      s,
+    );
+  }
 }

@@ -4,14 +4,16 @@ import { Layout } from "@keybr/keyboard";
 import { PageDataContext } from "@keybr/pages-shared";
 import { FakeSettingsContext } from "@keybr/settings";
 import { render } from "@testing-library/react";
-import { isNotNull, ok } from "rich-assert";
+import { equal, isNotNull, ok } from "rich-assert";
 import { KeyCombosSection } from "./KeyCombosSection.tsx";
 
 test("renders empty state when no adaptive pattern data exists", async () => {
   const layout = Layout.ALL.get("en-us")!;
   const r = render(
     <FakeIntlProvider>
-      <PageDataContext.Provider value={{ publicUser: { id: "test-user" } } as any}>
+      <PageDataContext.Provider
+        value={{ publicUser: { id: "test-user" } } as any}
+      >
         <FakeSettingsContext>
           <KeyCombosSection layout={layout} />
         </FakeSettingsContext>
@@ -21,7 +23,9 @@ test("renders empty state when no adaptive pattern data exists", async () => {
 
   isNotNull(await r.findByText("Key Combinations"));
   isNotNull(
-    await r.findByText(/No letter combination data recorded yet for this layout/),
+    await r.findByText(
+      /No letter combination data recorded yet for this layout/,
+    ),
   );
 
   r.unmount();
@@ -84,7 +88,9 @@ test("renders 2- and 3-letter combination stats when adaptive history is present
 
   const r = render(
     <FakeIntlProvider>
-      <PageDataContext.Provider value={{ publicUser: { id: "user-123" } } as any}>
+      <PageDataContext.Provider
+        value={{ publicUser: { id: "user-123" } } as any}
+      >
         <FakeSettingsContext>
           <KeyCombosSection layout={layout} />
         </FakeSettingsContext>
@@ -107,6 +113,45 @@ test("renders 2- and 3-letter combination stats when adaptive history is present
   isNotNull(await r.findByText("Combinations"));
   isNotNull(await r.findByText("Average Speed"));
   isNotNull(await r.findByText("Needs Review"));
+
+  localStorage.removeItem(key);
+  r.unmount();
+});
+
+test("shows the accuracy over all recorded samples", async () => {
+  const layout = Layout.ALL.get("en-us")!;
+  const pattern = {
+    time: 150,
+    streak: 2,
+    due: 20,
+    dueAt: Date.now() + 86400000,
+  };
+  const key = `keybr.adaptive.v1.${layout.id}`;
+  localStorage.setItem(
+    key,
+    JSON.stringify({
+      version: 2,
+      lesson: 12,
+      patterns: [
+        { ...pattern, text: "th", samples: 60, errors: 15, errorRate: 0.5 },
+        { ...pattern, text: "he", samples: 40, errors: 10, errorRate: 0 },
+      ],
+    }),
+  );
+
+  const r = render(
+    <FakeIntlProvider>
+      <PageDataContext.Provider value={{ publicUser: { id: null } } as any}>
+        <FakeSettingsContext>
+          <KeyCombosSection layout={layout} />
+        </FakeSettingsContext>
+      </PageDataContext.Provider>
+    </FakeIntlProvider>,
+  );
+
+  // 25 errors in 100 samples.
+  isNotNull(await r.findByText(/^75(\.0+)?\s?%$/));
+  equal((await r.findAllByTitle("Mastery streak: 2 of 6")).length, 2);
 
   localStorage.removeItem(key);
   r.unmount();

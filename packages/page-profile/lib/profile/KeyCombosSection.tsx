@@ -1,6 +1,6 @@
 import { useIntlNumbers } from "@keybr/intl";
 import { type Layout } from "@keybr/keyboard";
-import { type AdaptivePattern } from "@keybr/lesson";
+import { isAdaptivePatternDue } from "@keybr/lesson";
 import { useFormatter } from "@keybr/lesson-ui";
 import { timeToSpeed } from "@keybr/result";
 import {
@@ -33,16 +33,16 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
   const filteredPatterns = useMemo(() => {
     let list = combinationPatterns;
     if (filterLength === "2") {
-      list = list.filter((p) => p.text.length === 2);
+      list = list.filter((p) => [...p.text].length === 2);
     } else if (filterLength === "3") {
-      list = list.filter((p) => p.text.length === 3);
+      list = list.filter((p) => [...p.text].length === 3);
     }
 
     return [...list].sort((a, b) => {
       switch (sortBy) {
         case "slowest":
           // Slower speed means higher transition time
-          return b.time - a.time || b.errors - a.errors;
+          return b.time - a.time || b.errorRate - a.errorRate;
         case "fastest":
           return a.time - b.time;
         case "errors":
@@ -64,14 +64,22 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
     const count = combinationPatterns.length;
     const mastered = combinationPatterns.filter((p) => p.streak >= 6).length;
     const needsReview = combinationPatterns.filter(
-      (p) => p.streak === 0 || p.errors > 0 || p.due <= currentLesson + 1 || p.dueAt <= now,
+      (p) => p.streak === 0 || isAdaptivePatternDue(p, currentLesson, now),
     ).length;
     const totalTime = combinationPatterns.reduce((sum, p) => sum + p.time, 0);
     const avgSpeed = totalTime > 0 ? timeToSpeed(totalTime / count) : 0;
 
-    const totalSamples = combinationPatterns.reduce((sum, p) => sum + p.samples, 0);
-    const totalErrors = combinationPatterns.reduce((sum, p) => sum + p.errors, 0);
-    const accuracy = totalSamples > 0 ? Math.max(0, 1 - totalErrors / totalSamples) : 1;
+    // Both numbers accumulate over all lessons.
+    const totalSamples = combinationPatterns.reduce(
+      (sum, p) => sum + p.samples,
+      0,
+    );
+    const totalErrors = combinationPatterns.reduce(
+      (sum, p) => sum + p.errors,
+      0,
+    );
+    const accuracy =
+      totalSamples > 0 ? Math.max(0, 1 - totalErrors / totalSamples) : 1;
 
     return {
       count,
@@ -110,7 +118,9 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                   defaultMessage="Combinations"
                 />
               </span>
-              <span className={styles.itemValue}>{formatNumber(summary.count)}</span>
+              <span className={styles.itemValue}>
+                {formatNumber(summary.count)}
+              </span>
             </div>
 
             <div className={styles.statisticListItem}>
@@ -120,7 +130,9 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                   defaultMessage="Average Speed"
                 />
               </span>
-              <span className={styles.itemValue}>{formatSpeed(summary.avgSpeed)}</span>
+              <span className={styles.itemValue}>
+                {formatSpeed(summary.avgSpeed)}
+              </span>
             </div>
 
             <div className={styles.statisticListItem}>
@@ -130,7 +142,9 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                   defaultMessage="Accuracy"
                 />
               </span>
-              <span className={styles.itemValue}>{formatPercents(summary.accuracy)}</span>
+              <span className={styles.itemValue}>
+                {formatPercents(summary.accuracy)}
+              </span>
             </div>
 
             <div className={styles.statisticListItem}>
@@ -140,7 +154,9 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                   defaultMessage="Mastered"
                 />
               </span>
-              <span className={styles.itemValue}>{formatNumber(summary.mastered)}</span>
+              <span className={styles.itemValue}>
+                {formatNumber(summary.mastered)}
+              </span>
             </div>
 
             <div className={styles.statisticListItem}>
@@ -150,7 +166,9 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                   defaultMessage="Needs Review"
                 />
               </span>
-              <span className={styles.itemValue}>{formatNumber(summary.needsReview)}</span>
+              <span className={styles.itemValue}>
+                {formatNumber(summary.needsReview)}
+              </span>
             </div>
           </div>
 
@@ -291,8 +309,7 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
             <tbody>
               {filteredPatterns.slice(0, limit).map((pattern) => {
                 const speed = pattern.time > 0 ? timeToSpeed(pattern.time) : 0;
-                const isDue =
-                  pattern.due <= currentLesson + 1 || pattern.dueAt <= now;
+                const isDue = isAdaptivePatternDue(pattern, currentLesson, now);
                 return (
                   <tr key={pattern.text}>
                     <td className={styles.patternCol}>
@@ -354,7 +371,7 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
         <Para align="center">
           <FormattedMessage
             id="profile.chart.keyCombos.noData"
-            defaultMessage="No letter combination data recorded yet for this layout. Complete guided lessons with 'Mix in adaptive review' enabled to begin tracking combination speeds and review schedules."
+            defaultMessage="No letter combination data recorded yet for this layout. Complete guided lessons with “Mix in adaptive review” enabled to begin tracking combination speeds and review schedules."
           />
         </Para>
       )}
@@ -363,8 +380,18 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
 }
 
 function MasteryIndicator({ streak }: { readonly streak: number }): ReactNode {
+  const { formatMessage } = useIntl();
   return (
-    <div className={styles.streakDots} title={`Mastery streak: ${streak}/6`}>
+    <div
+      className={styles.streakDots}
+      title={formatMessage(
+        {
+          id: "profile.chart.keyCombos.streakTitle",
+          defaultMessage: "Mastery streak: {streak} of {total}",
+        },
+        { streak, total: 6 },
+      )}
+    >
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <span
           key={i}

@@ -8,6 +8,7 @@ import { LCG, type RNGStream } from "@keybr/rand";
 import { type KeyStatsMap, type Result, ResultGroups } from "@keybr/result";
 import { type Settings } from "@keybr/settings";
 import { type StyledText } from "@keybr/textinput";
+import { type AdaptivePractice } from "./adaptive.ts";
 import { type LessonKeys } from "./key.ts";
 
 export abstract class Lesson {
@@ -17,6 +18,12 @@ export abstract class Lesson {
   readonly keyboard: Keyboard;
   readonly codePoints: WeightedCodePointSet;
   readonly model: PhoneticModel;
+  /**
+   * The history of typed letter combinations to which this lesson adapts,
+   * or `null` if this lesson does not adapt to it. Lessons which keep
+   * a history start with an empty one, to be replaced with the stored one.
+   */
+  adaptivePractice: AdaptivePractice | null = null;
 
   protected constructor(
     settings: Settings,

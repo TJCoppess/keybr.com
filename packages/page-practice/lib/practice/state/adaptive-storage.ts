@@ -1,10 +1,10 @@
 import { keyboardProps } from "@keybr/keyboard";
-import { AdaptivePractice } from "@keybr/lesson";
+import { AdaptivePractice, adaptiveStorageKey } from "@keybr/lesson";
 import { type Settings } from "@keybr/settings";
 
 const memory = new Map<string, AdaptivePractice>();
 const keyOf = (settings: Settings) =>
-  `keybr.adaptive.v1.${settings.get(keyboardProps.layout).id}`;
+  adaptiveStorageKey(settings.get(keyboardProps.layout).id);
 
 export function loadAdaptivePractice(settings: Settings): AdaptivePractice {
   const key = keyOf(settings);

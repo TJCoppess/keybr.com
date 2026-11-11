@@ -1,10 +1,14 @@
 import { type WordList } from "@keybr/content";
 import { type Keyboard } from "@keybr/keyboard";
 import { Filter, Letter, type PhoneticModel } from "@keybr/phonetic-model";
-import { type RNGStream } from "@keybr/rand";
+import { randomSample, type RNGStream } from "@keybr/rand";
 import { type KeyStatsMap } from "@keybr/result";
 import { type Settings } from "@keybr/settings";
-import { AdaptivePractice, adaptiveWords } from "./adaptive.ts";
+import {
+  AdaptivePractice,
+  adaptiveWords,
+  findGeneratedWord,
+} from "./adaptive.ts";
 import { Dictionary, filterWordList } from "./dictionary.ts";
 import { LessonKey, LessonKeys } from "./key.ts";
 import { Lesson } from "./lesson.ts";
@@ -20,7 +24,6 @@ import {
 
 export class GuidedLesson extends Lesson {
   readonly dictionary: Dictionary;
-  adaptivePractice = new AdaptivePractice();
 
   constructor(
     settings: Settings,
@@ -34,6 +37,9 @@ export class GuidedLesson extends Lesson {
         (word) => word.length > 2,
       ),
     );
+    if (settings.get(lessonProps.guided.adaptivePractice)) {
+      this.adaptivePractice = new AdaptivePractice();
+    }
   }
 
   override get letters() {
@@ -115,25 +121,17 @@ export class GuidedLesson extends Lesson {
       lessonKeys.findFocusedKey(),
     );
     const normal = this.#makeWordGenerator(filter, rng);
-    const targets = this.settings.get(lessonProps.guided.adaptivePractice)
-      ? this.adaptivePractice.targets(
-          new Set(
-            lessonKeys.findIncludedKeys().map(({ letter }) => letter.codePoint),
-          ),
-          60000 / this.settings.get(lessonProps.targetSpeed),
-        )
-      : [];
+    const targets =
+      this.adaptivePractice?.targets(
+        new Set(
+          lessonKeys.findIncludedKeys().map(({ letter }) => letter.codePoint),
+        ),
+        60000 / this.settings.get(lessonProps.targetSpeed),
+      ) ?? [];
     const wordGenerator =
       targets.length === 0
         ? normal
-        : adaptiveWords(
-            normal,
-            this.#makeWordGenerator(
-              new Filter(lessonKeys.findIncludedKeys()),
-              rng,
-            ),
-            targets,
-          );
+        : adaptiveWords(normal, this.#makeWordFinder(lessonKeys, rng), targets);
     const words = mangledWords(
       uniqueWords(wordGenerator),
       this.model.language,
@@ -159,6 +157,34 @@ export class GuidedLesson extends Lesson {
     } else {
       return Letter.frequencyOrder(letters);
     }
+  }
+
+  /**
+   * Makes a function which finds a word with the given letter combination,
+   * made only of the included keys.
+   */
+  #makeWordFinder(lessonKeys: LessonKeys, rng: RNGStream) {
+    const filter = new Filter(lessonKeys.findIncludedKeys());
+    const pseudoWords = phoneticWords(this.model, filter, rng);
+    const naturalWords = this.settings.get(lessonProps.guided.naturalWords)
+      ? this.dictionary.find(filter)
+      : [];
+    const matches = new Map<string, readonly string[]>();
+    return (target: string): string | null => {
+      let words = matches.get(target);
+      if (words == null) {
+        // The dictionary is ordered from the most to the least common words.
+        words = naturalWords
+          .filter((word) => word.includes(target))
+          .slice(0, 100);
+        matches.set(target, words);
+      }
+      if (words.length > 0) {
+        return randomSample(words, rng);
+      }
+      // Pseudo-words cannot be looked up, so keep trying to generate one.
+      return findGeneratedWord(pseudoWords, target);
+    };
   }
 
   #makeWordGenerator(filter: Filter, rng: RNGStream) {
