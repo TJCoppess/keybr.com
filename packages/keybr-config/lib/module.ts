@@ -15,9 +15,10 @@ export class ConfigModule implements Module {
     bind("canonicalUrl").toValue(
       Env.getString(
         "APP_URL",
-        process.env.NODE_ENV === "production"
-          ? "https://www.keybr.com/"
-          : "http://localhost:3000/",
+        // A server started without any configuration is a local one.
+        (process.env.NODE_ENV || "development") === "development"
+          ? "http://localhost:3000/"
+          : "https://www.keybr.com/",
       ),
     );
   }

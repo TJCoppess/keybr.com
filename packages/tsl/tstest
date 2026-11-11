@@ -1,3 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
-env NODE_ENV=test node --enable-source-maps --import @keybr/tsl $@
+// Runs tests written in TypeScript, on any platform.
+
+import { run } from "./run.js";
+
+run(process.argv.slice(2), { NODE_ENV: "test" });

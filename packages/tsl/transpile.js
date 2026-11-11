@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, open, readFile, rename } from "node:fs/promises";
+import { mkdir, open, readFile, rename, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import ts from "typescript";
@@ -49,18 +49,43 @@ export async function transpile(source, fileName) {
     }
     throw new Error(`Error transpiling file [${fileName}]`);
   }
+  await writeCache(cachedFilename, outputText);
+  return outputText;
+}
+
+/**
+ * The cache is shared between concurrent processes, so another process
+ * may be writing or reading the same file. Losing this race is not an error.
+ *
+ * @param {string} cachedFilename
+ * @param {string} outputText
+ * @return {Promise<void>}
+ */
+async function writeCache(cachedFilename, outputText) {
+  const lockFilename = cachedFilename + ".lock";
   try {
     await mkdir(dirname(cachedFilename), { recursive: true });
-    const f = await open(cachedFilename + ".lock", "wx");
-    await f.writeFile(outputText, "utf-8");
-    await f.close();
-    await rename(cachedFilename + ".lock", cachedFilename);
+    const f = await open(lockFilename, "wx");
+    try {
+      await f.writeFile(outputText, "utf-8");
+    } finally {
+      await f.close();
+    }
   } catch (err) {
     if (err.code !== "EEXIST") {
       throw err;
     }
+    return;
   }
-  return outputText;
+  try {
+    await rename(lockFilename, cachedFilename);
+  } catch (err) {
+    // On Windows a file cannot be replaced while another process reads it.
+    await rm(lockFilename, { force: true });
+    if (!["EEXIST", "EPERM", "EBUSY", "EACCES"].includes(err.code)) {
+      throw err;
+    }
+  }
 }
 
 /**

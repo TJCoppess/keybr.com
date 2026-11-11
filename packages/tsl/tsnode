@@ -1,3 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
-node --enable-source-maps --import @keybr/tsl $@
+// Runs a script written in TypeScript, on any platform.
+
+import { run } from "./run.js";
+
+run(process.argv.slice(2));

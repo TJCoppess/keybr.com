@@ -88,9 +88,12 @@ test("get path", () => {
     /Invalid env property 'A_PATH': Empty path string/,
   );
 
+  // On Windows a path with two leading slashes is a network path.
+  const normalized =
+    process.platform === "win32" ? String.raw`\\x\y\z` : "/x/y/z";
   process.env.A_PATH = "//x//y//.//0//..//z";
-  equal(Env.getPath("A_PATH"), "/x/y/z");
-  equal(Env.getPath("A_PATH", "/a/b/c"), "/x/y/z");
+  equal(Env.getPath("A_PATH"), normalized);
+  equal(Env.getPath("A_PATH", "/a/b/c"), normalized);
 
   process.env.A_PATH = "x/y/z";
   equal(Env.getPath("A_PATH"), join(process.cwd(), "x/y/z"));
