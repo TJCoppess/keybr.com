@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import { FakeIntlProvider } from "@keybr/intl";
 import { lessonProps, LessonType } from "@keybr/lesson";
+import { type PageData,PageDataContext } from "@keybr/pages-shared";
 import { FakePhoneticModel } from "@keybr/phonetic-model";
 import { PhoneticModelLoader } from "@keybr/phonetic-model-loader";
 import { FakeResultContext, ResultFaker } from "@keybr/result";
@@ -22,7 +23,11 @@ test("render", async () => {
           .set(lessonProps.customText.content, "abcdefghij")}
       >
         <FakeResultContext initialResults={faker.nextResultList(100)}>
-          <PracticeScreen />
+          <PageDataContext.Provider
+            value={{ publicUser: { id: null } } as PageData}
+          >
+            <PracticeScreen />
+          </PageDataContext.Provider>
         </FakeResultContext>
       </FakeSettingsContext>
     </FakeIntlProvider>,

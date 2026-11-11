@@ -55,6 +55,10 @@ export class LessonState {
   constructor(
     progress: Progress,
     onResult: (result: Result, textInput: TextInput) => void,
+    readonly adaptiveStorage = {
+      load: loadAdaptivePractice,
+      save: saveAdaptivePractice,
+    },
   ) {
     this.#onResult = onResult;
     this.settings = progress.settings;
@@ -67,7 +71,7 @@ export class LessonState {
     this.dailyGoal = progress.dailyGoal.copy();
     this.lessonKeys = this.lesson.update(this.keyStatsMap);
     if (this.lesson instanceof GuidedLesson) {
-      this.lesson.adaptivePractice = loadAdaptivePractice(this.settings);
+      this.lesson.adaptivePractice = adaptiveStorage.load(this.settings);
     }
     this.#reset(this.lesson.generate(this.lessonKeys, Lesson.rng));
   }
@@ -98,7 +102,7 @@ export class LessonState {
           })),
           60000 / this.settings.get(lessonProps.targetSpeed),
         );
-        saveAdaptivePractice(this.settings, this.lesson.adaptivePractice);
+        this.adaptiveStorage.save(this.settings, this.lesson.adaptivePractice);
       }
       this.#onResult(result, this.textInput);
     }

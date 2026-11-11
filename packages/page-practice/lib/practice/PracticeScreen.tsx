@@ -7,7 +7,7 @@ import { LoadingProgress } from "@keybr/pages-shared";
 import { type Result, useResults } from "@keybr/result";
 import { useSettings } from "@keybr/settings";
 import { useEffect, useMemo, useState } from "react";
-import { Controller } from "./Controller.tsx";
+import { AccountController } from "./AccountController.tsx";
 import { displayEvent, Progress } from "./state/index.ts";
 
 export function PracticeScreen() {
@@ -27,7 +27,7 @@ function ProgressUpdater({ lesson }: { readonly lesson: Lesson }) {
     return <LoadingProgress total={total} current={current} />;
   } else {
     return (
-      <Controller
+      <AccountController
         progress={progress}
         onResult={(result) => {
           if (result.validate()) {

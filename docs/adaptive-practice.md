@@ -24,11 +24,23 @@ matches fall back to ordinary words. Word repetition and duplicate suppression
 still apply, so this is a selection budget rather than an exact proportion of
 the final text.
 
-History is limited to 1,000 patterns per keyboard layout and saved in this
-browser's local storage. It is shared by people using that browser profile and
-does not sync with an account. With storage disabled, history lasts for the
-current page session. It starts learning from newly completed lessons; existing
-per-key results do not contain the sequences needed to reconstruct it.
+History is limited to 1,000 patterns per keyboard layout. Guest history stays in
+the browser. Signed-in history is saved to the local server after completed
+lessons, in `DATA_DIR/adaptive/<layout>/user_settings/`, separately for each
+account. Back up the entire data directory to preserve it along with ordinary
+progress and account data. This is not a backup to keybr.com or another computer.
+
+On opening guided practice, account history is restored before generating the
+lesson. If the account has no history, existing browser history is imported.
+Account-scoped browser caches retain pending saves when a request fails; they
+retry on the next completed lesson, page reload, or via the displayed retry
+button. A failed initial load pauses practice rather than overwriting server
+history. Use one active practice session per account/layout; simultaneous
+sessions replace snapshots rather than merge them.
+
+It starts learning from newly completed lessons; existing per-key results do not
+contain the sequences needed to reconstruct it. One lesson is one completed
+block of generated text, regardless of the number of displayed lines.
 
 These scheduling rules are initial heuristics, not a demonstrated guarantee of
 faster learning. Tests cover scheduling, persistence, filtering, bounded word

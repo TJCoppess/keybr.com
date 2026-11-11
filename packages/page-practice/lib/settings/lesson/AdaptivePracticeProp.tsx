@@ -34,7 +34,7 @@ export function AdaptivePracticeProp() {
         <Description>
           <FormattedMessage
             id="settings.adaptivePractice.description"
-            defaultMessage="Practice difficult letter combinations, revisit learned patterns, and check mistakes again after a delay. Review uses only unlocked letters and up to one in four word selections. Learning history is saved in this browser separately for each keyboard layout; it does not sync with your account."
+            defaultMessage="Practice difficult letter combinations, revisit learned patterns, and check mistakes again after a delay. Review uses only unlocked letters and up to one in four word selections. Learning history is saved separately for each layout. Sign in to your local account to back it up on this server and restore it in another browser."
           />
         </Description>
       </Explainer>

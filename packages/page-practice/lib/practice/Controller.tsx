@@ -21,9 +21,11 @@ import {
 export const Controller = memo(function Controller({
   progress,
   onResult,
+  adaptiveStorage,
 }: {
   readonly progress: Progress;
   readonly onResult: (result: Result) => void;
+  readonly adaptiveStorage?: ConstructorParameters<typeof LessonState>[2];
 }): ReactNode {
   const {
     state,
@@ -32,7 +34,7 @@ export const Controller = memo(function Controller({
     handleKeyDown,
     handleKeyUp,
     handleInput,
-  } = useLessonState(progress, onResult);
+  } = useLessonState(progress, onResult, adaptiveStorage);
   useHotkeys({
     ["Ctrl+ArrowLeft"]: handleResetLesson,
     ["Ctrl+ArrowRight"]: handleSkipLesson,
@@ -58,6 +60,7 @@ export const Controller = memo(function Controller({
 function useLessonState(
   progress: Progress,
   onResult: (result: Result) => void,
+  adaptiveStorage?: ConstructorParameters<typeof LessonState>[2],
 ) {
   const keyboard = useKeyboard();
   const timeout = useTimeout();
@@ -71,11 +74,15 @@ function useLessonState(
 
   return useMemo(() => {
     // New lesson.
-    const state = new LessonState(progress, (result, textInput) => {
-      setKey(key + 1);
-      lastLessonRef.current = makeLastLesson(result, textInput.steps);
-      onResultRef.current(result);
-    });
+    const state = new LessonState(
+      progress,
+      (result, textInput) => {
+        setKey(key + 1);
+        lastLessonRef.current = makeLastLesson(result, textInput.steps);
+        onResultRef.current(result);
+      },
+      adaptiveStorage,
+    );
     state.lastLesson = lastLessonRef.current;
     setLines(state.lines);
     setDepressedKeys(state.depressedKeys);
@@ -123,5 +130,5 @@ function useLessonState(
       handleKeyUp: onKeyUp,
       handleInput: onInput,
     };
-  }, [progress, keyboard, timeout, key]);
+  }, [progress, keyboard, timeout, key, adaptiveStorage]);
 }

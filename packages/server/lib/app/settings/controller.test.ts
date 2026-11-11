@@ -10,6 +10,44 @@ import { findUser } from "../test/sql.ts";
 
 const context = new TestContext();
 
+test("adaptive history requires login and is isolated by account and layout", async () => {
+  const request = startApp(context.get(Application, kMain));
+  const path = "/_/sync/adaptive/en-colemak-dh";
+  const history = {
+    version: 1,
+    lesson: 3,
+    patterns: [
+      {
+        text: "th",
+        samples: 4,
+        time: 120,
+        errors: 1,
+        streak: 0,
+        due: 4,
+        dueAt: 1000,
+      },
+    ],
+  };
+  equal((await request.GET(path).send()).status, 403);
+  equal((await request.PUT(path).send(history)).status, 403);
+  await request.become("user1@keybr.com");
+  equal((await request.PUT(path).send(history)).status, 204);
+  deepEqual(await (await request.GET(path).send()).body.json(), history);
+  deepEqual(
+    await (await request.GET("/_/sync/adaptive/en-us").send()).body.json(),
+    {},
+  );
+  await request.become("user2@keybr.com");
+  deepEqual(await (await request.GET(path).send()).body.json(), {});
+  equal(
+    (await request.PUT(path).send({ version: 1, lesson: -1, patterns: [] }))
+      .status,
+    400,
+  );
+  await request.become("user1@keybr.com");
+  deepEqual(await (await request.GET(path).send()).body.json(), history);
+});
+
 test("handle unauthenticated user", async () => {
   // Arrange.
 
