@@ -1,6 +1,6 @@
 import { useIntlNumbers } from "@keybr/intl";
 import { type Layout } from "@keybr/keyboard";
-import { isAdaptivePatternDue } from "@keybr/lesson";
+import { adaptiveSpeedGain, isAdaptivePatternDue } from "@keybr/lesson";
 import { useFormatter } from "@keybr/lesson-ui";
 import { timeToSpeed } from "@keybr/result";
 import {
@@ -22,7 +22,8 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
   const { formatNumber, formatPercents } = useIntlNumbers();
   const { formatSpeed } = useFormatter();
 
-  const { combinationPatterns, currentLesson } = useAdaptivePatterns(layout);
+  const { combinationPatterns, wordPatterns, confusions, currentLesson } =
+    useAdaptivePatterns(layout);
 
   const [filterLength, setFilterLength] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("slowest");
@@ -32,7 +33,9 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
 
   const filteredPatterns = useMemo(() => {
     let list = combinationPatterns;
-    if (filterLength === "2") {
+    if (filterLength === "words") {
+      list = wordPatterns;
+    } else if (filterLength === "2") {
       list = list.filter((p) => [...p.text].length === 2);
     } else if (filterLength === "3") {
       list = list.filter((p) => [...p.text].length === 3);
@@ -55,7 +58,15 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
           return 0;
       }
     });
-  }, [combinationPatterns, filterLength, sortBy]);
+  }, [combinationPatterns, wordPatterns, filterLength, sortBy]);
+
+  const topConfusions = useMemo(
+    () => [...confusions].sort((a, b) => b.count - a.count).slice(0, 12),
+    [confusions],
+  );
+
+  const formatGain = (gain: number) =>
+    `${gain < 0 ? "\u2212" : "+"}${formatPercents(Math.abs(gain))}`;
 
   const summary = useMemo(() => {
     if (combinationPatterns.length === 0) {
@@ -87,8 +98,9 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
       needsReview,
       avgSpeed,
       accuracy,
+      speedGain: adaptiveSpeedGain([...combinationPatterns, ...wordPatterns]),
     };
-  }, [combinationPatterns, currentLesson, now]);
+  }, [combinationPatterns, wordPatterns, currentLesson, now]);
 
   return (
     <Figure>
@@ -103,7 +115,7 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
         <Figure.Description>
           <FormattedMessage
             id="profile.chart.keyCombos.description"
-            defaultMessage="This section shows performance statistics and spaced-repetition review status for 2- and 3-letter combinations tracked during guided practice."
+            defaultMessage="This section shows performance statistics and review status of the letter combinations and words tracked during practice, and the letters which you type in place of other letters. Speed gain compares the current speed of the patterns reviewed at least twice with their speed before the first review, and of the patterns never reviewed with their speed when first measured. Slow patterns tend to get faster anyway, so take the difference as a hint."
           />
         </Figure.Description>
       </Explainer>
@@ -170,6 +182,34 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                 {formatNumber(summary.needsReview)}
               </span>
             </div>
+
+            <div className={styles.statisticListItem}>
+              <span className={styles.itemName}>
+                <FormattedMessage
+                  id="profile.chart.keyCombos.gainReviewed"
+                  defaultMessage="Speed Gain, Reviewed"
+                />
+              </span>
+              <span className={styles.itemValue}>
+                {summary.speedGain.reviewed != null
+                  ? formatGain(summary.speedGain.reviewed.gain)
+                  : "\u2013"}
+              </span>
+            </div>
+
+            <div className={styles.statisticListItem}>
+              <span className={styles.itemName}>
+                <FormattedMessage
+                  id="profile.chart.keyCombos.gainOther"
+                  defaultMessage="Speed Gain, Others"
+                />
+              </span>
+              <span className={styles.itemValue}>
+                {summary.speedGain.other != null
+                  ? formatGain(summary.speedGain.other.gain)
+                  : "\u2013"}
+              </span>
+            </div>
           </div>
 
           <div className={styles.controls}>
@@ -203,6 +243,13 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                         defaultMessage: "3-Letter (Trigrams)",
                       }),
                       value: "3",
+                    },
+                    {
+                      name: formatMessage({
+                        id: "profile.chart.keyCombos.filterWords",
+                        defaultMessage: "Whole Words",
+                      }),
+                      value: "words",
                     },
                   ]}
                   value={filterLength}
@@ -365,6 +412,35 @@ export function KeyCombosSection({ layout }: { readonly layout: Layout }) {
                 />
               </Button>
             </div>
+          )}
+
+          {topConfusions.length > 0 && (
+            <>
+              <Para>
+                <FormattedMessage
+                  id="profile.chart.keyCombos.confusions"
+                  defaultMessage="Letters most often typed in place of other letters, and how many times:"
+                />
+              </Para>
+              <div className={styles.confusionList}>
+                {topConfusions.map(({ expected, typed, count }) => (
+                  <span
+                    key={expected + typed}
+                    className={styles.comboBadge}
+                    title={formatMessage(
+                      {
+                        id: "profile.chart.keyCombos.confusionTitle",
+                        defaultMessage:
+                          "Typed {typed} in place of {expected} {count, plural, one {# time} other {# times}}",
+                      },
+                      { expected, typed, count },
+                    )}
+                  >
+                    {`${expected} \u2192 ${typed} \u00d7${formatNumber(count)}`}
+                  </span>
+                ))}
+              </div>
+            </>
           )}
         </>
       ) : (

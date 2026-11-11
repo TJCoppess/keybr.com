@@ -269,3 +269,46 @@ export function adaptiveAccountStorageKey(
 export function adaptiveSyncPath(layoutId: string): string {
   return `/_/sync/adaptive/${encodeURIComponent(layoutId)}`;
 }
+
+/** How much faster the patterns have become. */
+export type AdaptiveSpeedGain = {
+  /** The number of patterns which were measured. */
+  readonly count: number;
+  /** The mean gain of speed, where 0.1 is ten percent faster. */
+  readonly gain: number;
+};
+
+/**
+ * Compares the current speed of the patterns which were reviewed at least
+ * twice with their speed before the first review, and the current speed of
+ * the patterns which were never reviewed with their speed when they were
+ * first measured.
+ *
+ * Patterns are picked for review because they are slow, and slow patterns
+ * tend to get faster anyway, so the difference between the two groups is
+ * a hint and not a proof that review helps.
+ */
+export function adaptiveSpeedGain(patterns: readonly AdaptivePattern[]): {
+  readonly reviewed: AdaptiveSpeedGain | null;
+  readonly other: AdaptiveSpeedGain | null;
+} {
+  const reviewed: number[] = [];
+  const other: number[] = [];
+  for (const { time, samples, first, reviews, reviewedFrom } of patterns) {
+    if (time > 0) {
+      if (reviews >= 2 && reviewedFrom > 0) {
+        reviewed.push(reviewedFrom / time - 1);
+      } else if (reviews === 0 && first > 0 && samples >= 6) {
+        other.push(first / time - 1);
+      }
+    }
+  }
+  const mean = (list: readonly number[]): AdaptiveSpeedGain | null =>
+    list.length > 0
+      ? {
+          count: list.length,
+          gain: list.reduce((a, b) => a + b, 0) / list.length,
+        }
+      : null;
+  return { reviewed: mean(reviewed), other: mean(other) };
+}

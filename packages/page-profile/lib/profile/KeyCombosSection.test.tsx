@@ -156,3 +156,56 @@ test("shows the accuracy over all recorded samples", async () => {
   localStorage.removeItem(key);
   r.unmount();
 });
+
+test("shows words, confused letters and the speed gain", async () => {
+  const layout = Layout.ALL.get("en-us")!;
+  const pattern = {
+    samples: 10,
+    time: 100,
+    errors: 0,
+    errorRate: 0,
+    streak: 2,
+    due: 20,
+    dueAt: Date.now() + 86400000,
+    best: 100,
+    stale: 0,
+    first: 100,
+    reviews: 0,
+    reviewedFrom: 0,
+  };
+  const key = `keybr.adaptive.v1.${layout.id}`;
+  localStorage.setItem(
+    key,
+    JSON.stringify({
+      version: 3,
+      lesson: 12,
+      patterns: [
+        { ...pattern, text: "th", reviews: 3, reviewedFrom: 125 },
+        { ...pattern, text: "he", first: 90 },
+      ],
+      words: [{ ...pattern, text: "there" }],
+      confusions: [{ expected: "e", typed: "r", count: 4, lesson: 11 }],
+    }),
+  );
+
+  const r = render(
+    <FakeIntlProvider>
+      <PageDataContext.Provider value={{ publicUser: { id: null } } as any}>
+        <FakeSettingsContext>
+          <KeyCombosSection layout={layout} />
+        </FakeSettingsContext>
+      </PageDataContext.Provider>
+    </FakeIntlProvider>,
+  );
+
+  // The reviewed pattern is a quarter faster. Of the other two,
+  // one is a tenth slower and one is the same.
+  isNotNull(await r.findByText(/^\+25(\.0+)?\s?%$/));
+  isNotNull(await r.findByText(/^\u22125(\.0+)?\s?%$/));
+  isNotNull(await r.findByText("e \u2192 r \u00d74"));
+  // Whole words are listed only when chosen in the filter.
+  equal(r.queryByText("there"), null);
+
+  localStorage.removeItem(key);
+  r.unmount();
+});

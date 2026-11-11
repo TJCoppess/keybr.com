@@ -73,5 +73,7 @@ export function useAdaptivePatterns(layout: Layout) {
     history,
     currentLesson: history.lesson,
     combinationPatterns: history.patterns,
+    wordPatterns: history.words,
+    confusions: history.confusions,
   };
 }

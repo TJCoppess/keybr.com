@@ -7,6 +7,7 @@ import {
   findGeneratedWord,
   matchesAdaptiveTarget,
 } from "./adaptive.ts";
+import { adaptiveSpeedGain } from "./adaptive-history.ts";
 
 const allowed = new Set([..."thin"].map((c) => c.codePointAt(0)!));
 function steps(text = "thin thin thin", typo = false, time = 100): Step[] {
@@ -357,4 +358,40 @@ test("corrupt storage is ignored", () => {
   ]) {
     deepStrictEqual(AdaptivePractice.restore(value).targets(allowed, 200), []);
   }
+});
+
+test("speed gain of reviewed and other patterns", () => {
+  const pattern = {
+    text: "th",
+    samples: 10,
+    time: 100,
+    errors: 0,
+    errorRate: 0,
+    streak: 1,
+    due: 1,
+    dueAt: 1,
+    best: 100,
+    stale: 0,
+    first: 110,
+    reviews: 0,
+    reviewedFrom: 0,
+  };
+  deepStrictEqual(adaptiveSpeedGain([]), { reviewed: null, other: null });
+  deepStrictEqual(
+    adaptiveSpeedGain([
+      { ...pattern, reviews: 2, reviewedFrom: 150 },
+      { ...pattern, reviews: 3, reviewedFrom: 250 },
+      // Reviewed only once.
+      { ...pattern, reviews: 1, reviewedFrom: 500 },
+      { ...pattern, first: 125 },
+      { ...pattern, first: 75 },
+      // Too few samples, or measured before the progress was kept.
+      { ...pattern, first: 500, samples: 5 },
+      { ...pattern, first: 0 },
+    ]),
+    {
+      reviewed: { count: 2, gain: 1 },
+      other: { count: 2, gain: 0 },
+    },
+  );
 });
