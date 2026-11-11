@@ -1,6 +1,6 @@
 # English
 
-Translated: 386 messages, 5129 words
+Translated: 400 messages, 5327 words
 
 Untranslated: 0 messages, 0 words
 
@@ -8,10 +8,11 @@ Untranslated: 0 messages, 0 words
 
 Translated: 339 messages, 4744 words
 
-Untranslated: 43 messages, 361 words
+Untranslated: 57 messages, 559 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -19,111 +20,111 @@ Untranslated: 43 messages, 361 words
 * *Fastest*
 * *Letters*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Volume:*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
 * ...
 
 # Arabic
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Bulgarian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Bangla
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Catalan
 
 Translated: 310 messages, 3556 words
 
-Untranslated: 70 messages, 1527 words
+Untranslated: 84 messages, 1725 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Errors*
 * *Review*
@@ -132,55 +133,55 @@ Untranslated: 70 messages, 1527 words
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
 * ...
 
 # Czech
 
 Translated: 338 messages, 4742 words
 
-Untranslated: 44 messages, 363 words
+Untranslated: 58 messages, 561 words
 
 * *Font:*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Syntax:*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
 * ...
 
 # Danish
 
 Translated: 331 messages, 4689 words
 
-Untranslated: 49 messages, 394 words
+Untranslated: 63 messages, 592 words
 
 * *Retry*
 * *Score*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Layout*
 * *Review*
@@ -190,77 +191,76 @@ Untranslated: 49 messages, 394 words
 * *Layout:*
 * *Layouts*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
-* *Position*
-* *Schedule*
-* *Sort by:*
-* *Practiced*
-* *Combination*
 * ...
 
 # German
 
 Translated: 339 messages, 4744 words
 
-Untranslated: 43 messages, 361 words
+Untranslated: 57 messages, 559 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Position*
 * *Schedule*
 * *Sort by:*
 * *Alphabet:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
 * ...
 
 # Greek
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Esperanto
 
 Translated: 77 messages, 1126 words
 
-Untranslated: 298 messages, 3921 words
+Untranslated: 312 messages, 4119 words
 
 * *GO!*
 * *Copy*
@@ -276,79 +276,80 @@ Untranslated: 298 messages, 3921 words
 * *Speed*
 * *Speed*
 * *Visit*
+* *Delete*
 * *Errors*
 * *Errors*
 * *Review*
 * *Review*
 * *Typing*
-* *Zones:*
 * ...
 
 # Spanish
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Estonian
 
 Translated: 338 messages, 4743 words
 
-Untranslated: 44 messages, 362 words
+Untranslated: 58 messages, 560 words
 
 * *GO!*
 * *Font:*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Progress*
 * *Schedule*
-* *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
 * ...
 
 # Persian
 
 Translated: 295 messages, 2959 words
 
-Untranslated: 85 messages, 2124 words
+Untranslated: 99 messages, 2322 words
 
 * *Books*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -356,28 +357,28 @@ Untranslated: 85 messages, 2124 words
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Syntax:*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
-* *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
 * ...
 
 # Finnish
 
 Translated: 208 messages, 2284 words
 
-Untranslated: 168 messages, 2765 words
+Untranslated: 182 messages, 2963 words
 
 * *GO!*
 * *Time*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -387,20 +388,19 @@ Untranslated: 168 messages, 2765 words
 * *Mastery*
 * *Metrics*
 * *Not set*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Syntax:*
 * *Accuracy*
-* *Mastered*
-* *Mastered*
-* *Position*
-* *Practice*
-* *Schedule*
+* *Download*
 * ...
 
 # Faroese
 
 Translated: 44 messages, 583 words
 
-Untranslated: 330 messages, 4453 words
+Untranslated: 344 messages, 4651 words
 
 * *GO!*
 * *Copy*
@@ -417,10 +417,10 @@ Untranslated: 330 messages, 4453 words
 * *Speed*
 * *Speed*
 * *Visit*
+* *Delete*
 * *Errors*
 * *Errors*
 * *Layout*
-* *Review*
 * *Review*
 * ...
 
@@ -428,10 +428,11 @@ Untranslated: 330 messages, 4453 words
 
 Translated: 333 messages, 4544 words
 
-Untranslated: 49 messages, 561 words
+Untranslated: 63 messages, 759 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -439,27 +440,27 @@ Untranslated: 49 messages, 561 words
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
 * *Options*
+* *Symbols*
+* *Symbols*
 * *Volume:*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Position*
-* *Schedule*
-* *Sort by:*
-* *Alphabet:*
-* *Practiced*
-* *Combination*
 * ...
 
 # Irish
 
 Translated: 337 messages, 4735 words
 
-Untranslated: 45 messages, 370 words
+Untranslated: 59 messages, 568 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -467,136 +468,135 @@ Untranslated: 45 messages, 370 words
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Smoothness:*
-* *Whole Words*
+* *Practice:*
 * ...
 
 # Hebrew
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Croatian
 
 Translated: 337 messages, 4740 words
 
-Untranslated: 45 messages, 365 words
+Untranslated: 59 messages, 563 words
 
 * *Font:*
 * *Reset*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Multiplayer*
 * ...
 
 # Hungarian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Indonesian
 
 Translated: 339 messages, 4744 words
 
-Untranslated: 43 messages, 361 words
+Untranslated: 57 messages, 559 words
 
 * *GO!*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Volume:*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
 * ...
 
 # Icelandic
 
 Translated: 95 messages, 1742 words
 
-Untranslated: 280 messages, 3305 words
+Untranslated: 294 messages, 3503 words
 
 * *GO!*
 * *Copy*
@@ -613,22 +613,23 @@ Untranslated: 280 messages, 3305 words
 * *Speed*
 * *Speed*
 * *Visit*
+* *Delete*
 * *Errors*
 * *Errors*
 * *Review*
 * *Review*
-* *Typing*
 * ...
 
 # Italian
 
 Translated: 334 messages, 4738 words
 
-Untranslated: 47 messages, 365 words
+Untranslated: 61 messages, 563 words
 
 * *Font:*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Layout*
 * *Review*
@@ -639,48 +640,47 @@ Untranslated: 47 messages, 365 words
 * *Layout:*
 * *Layouts*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Volume:*
 * *Accuracy*
-* *Mastered*
-* *Mastered*
-* *Schedule*
-* *Sort by:*
-* *Practiced*
+* *Download*
 * ...
 
 # Japanese
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Korean
 
 Translated: 145 messages, 1297 words
 
-Untranslated: 235 messages, 3786 words
+Untranslated: 249 messages, 3984 words
 
 * *Copy*
 * *Done*
@@ -692,6 +692,7 @@ Untranslated: 235 messages, 3786 words
 * *Retry*
 * *Speed*
 * *Visit*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -701,42 +702,41 @@ Untranslated: 235 messages, 3786 words
 * *Fastest*
 * *Lessons*
 * *Mastery*
-* *Not set*
 * ...
 
 # Lithuanian
 
 Translated: 305 messages, 3388 words
 
-Untranslated: 74 messages, 1686 words
+Untranslated: 88 messages, 1884 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Mongolian
 
 Translated: 16 messages, 378 words
 
-Untranslated: 356 messages, 4629 words
+Untranslated: 370 messages, 4827 words
 
 * *GO!*
 * *Copy*
@@ -756,15 +756,15 @@ Untranslated: 356 messages, 4629 words
 * *Speed*
 * *Speed*
 * *Visit*
+* *Delete*
 * *Digits*
-* *Errors*
 * ...
 
 # Norwegian Bokmål
 
 Translated: 211 messages, 2446 words
 
-Untranslated: 166 messages, 2606 words
+Untranslated: 180 messages, 2804 words
 
 * *Done*
 * *Help*
@@ -773,6 +773,7 @@ Untranslated: 166 messages, 2606 words
 * *Retry*
 * *Speed*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -780,51 +781,51 @@ Untranslated: 166 messages, 2606 words
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
 * *Accuracy*
-* *Mastered*
-* *Mastered*
-* *Schedule*
-* *Settings*
 * ...
 
 # Nepali
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Dutch
 
 Translated: 333 messages, 4736 words
 
-Untranslated: 48 messages, 367 words
+Untranslated: 62 messages, 565 words
 
 * *Retry*
 * *Score*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -834,52 +835,52 @@ Untranslated: 48 messages, 367 words
 * *Fastest*
 * *Letters*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Volume:*
 * *Accuracy*
+* *Download*
 * *Mastered*
-* *Mastered*
-* *Schedule*
-* *Sort by:*
-* *Practiced*
-* *Combination*
 * ...
 
 # Polish
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Brazilian Portuguese
 
 Translated: 338 messages, 4743 words
 
-Untranslated: 44 messages, 362 words
+Untranslated: 58 messages, 560 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Layout*
 * *Review*
@@ -889,26 +890,26 @@ Untranslated: 44 messages, 362 words
 * *Layout:*
 * *Layouts*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
-* *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
 * ...
 
 # European Portuguese
 
 Translated: 319 messages, 4618 words
 
-Untranslated: 61 messages, 465 words
+Untranslated: 75 messages, 663 words
 
 * *Books*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Layout*
 * *Review*
@@ -919,24 +920,24 @@ Untranslated: 61 messages, 465 words
 * *Layout:*
 * *Layouts*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Volume:*
 * *Accuracy*
-* *Mastered*
-* *Mastered*
-* *Schedule*
-* *Sort by:*
-* *Practiced*
+* *Download*
 * ...
 
 # Romanian
 
 Translated: 298 messages, 3587 words
 
-Untranslated: 77 messages, 1474 words
+Untranslated: 91 messages, 1672 words
 
 * *Font:*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Layout*
 * *Review*
@@ -948,134 +949,134 @@ Untranslated: 77 messages, 1474 words
 * *Layout:*
 * *Layouts*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
-* *Mastered*
-* *Mastered*
-* *Schedule*
-* *Sort by:*
-* *Practiced*
+* *Download*
 * ...
 
 # Russian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Slovak
 
 Translated: 340 messages, 4745 words
 
-Untranslated: 42 messages, 360 words
+Untranslated: 56 messages, 558 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Syntax:*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
+* *Practice:*
 * ...
 
 # Slovenian
 
 Translated: 340 messages, 4745 words
 
-Untranslated: 42 messages, 360 words
+Untranslated: 56 messages, 558 words
 
 * *Font:*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
+* *Practice:*
 * ...
 
 # Albanian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Swedish
 
 Translated: 338 messages, 4743 words
 
-Untranslated: 44 messages, 362 words
+Untranslated: 58 messages, 560 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Layout*
 * *Review*
@@ -1084,26 +1085,26 @@ Untranslated: 44 messages, 362 words
 * *Fastest*
 * *Layout:*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Syntax:*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
-* *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
 * ...
 
 # Thai
 
 Translated: 329 messages, 4635 words
 
-Untranslated: 51 messages, 448 words
+Untranslated: 65 messages, 646 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -1111,29 +1112,29 @@ Untranslated: 51 messages, 448 words
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
+* *Practice:*
 * ...
 
 # Turkish
 
 Translated: 227 messages, 2126 words
 
-Untranslated: 150 messages, 2924 words
+Untranslated: 164 messages, 3122 words
 
 * *Books*
 * *Font:*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
@@ -1142,152 +1143,151 @@ Untranslated: 150 messages, 2924 words
 * *Fastest*
 * *Mastery*
 * *Metrics*
+* *Numbers*
 * *Preview*
 * *Sign-In*
+* *Symbols*
+* *Symbols*
 * *Syntax:*
 * *Accuracy*
-* *Mastered*
-* *Mastered*
-* *Schedule*
-* *Sort by:*
 * ...
 
 # Ukrainian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Vietnamese
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Simplified Chinese
 
 Translated: 340 messages, 4739 words
 
-Untranslated: 42 messages, 366 words
+Untranslated: 56 messages, 564 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Traditional Chinese
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 41 messages, 359 words
+Untranslated: 55 messages, 557 words
 
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
+* *Practice:*
 * *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
-* *Needs Review*
 * ...
 
 # Chinese (Taiwan)
 
 Translated: 340 messages, 4745 words
 
-Untranslated: 42 messages, 360 words
+Untranslated: 56 messages, 558 words
 
 * *GO!*
 * *Retry*
 * *Speed*
+* *Delete*
 * *Errors*
 * *Review*
 * *Review*
 * *Due now*
 * *Fastest*
 * *Mastery*
+* *Numbers*
+* *Symbols*
+* *Symbols*
 * *Accuracy*
+* *Download*
 * *Mastered*
 * *Mastered*
 * *Schedule*
 * *Sort by:*
-* *Practiced*
-* *Combination*
-* *Due Soonest*
-* *Most Errors*
-* *Whole Words*
-* *Combinations*
+* *Practice:*
 * ...

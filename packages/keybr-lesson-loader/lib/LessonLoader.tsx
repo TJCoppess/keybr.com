@@ -11,6 +11,7 @@ import {
   lessonProps,
   LessonType,
   NumbersLesson,
+  SymbolsLesson,
   WordListLesson,
 } from "@keybr/lesson";
 import { LoadingProgress } from "@keybr/pages-shared";
@@ -108,6 +109,14 @@ function useLoader(model: PhoneticModel): Lesson | null {
         case LessonType.NUMBERS: {
           if (!didCancel) {
             setResult(new NumbersLesson(settings, keyboard, model));
+          }
+          break;
+        }
+        case LessonType.SYMBOLS: {
+          const { language } = KeyboardOptions.from(settings);
+          const wordList = await loadWordList(language);
+          if (!didCancel) {
+            setResult(new SymbolsLesson(settings, keyboard, model, wordList));
           }
           break;
         }

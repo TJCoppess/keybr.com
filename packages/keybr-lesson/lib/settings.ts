@@ -53,6 +53,13 @@ export const lessonProps = {
   numbers: {
     benford: booleanProp("lesson.numbers.benford", true),
   } as const,
+  symbols: {
+    punctuation: booleanProp("lesson.symbols.punctuation", true),
+    digits: booleanProp("lesson.symbols.digits", true),
+    symbols: booleanProp("lesson.symbols.symbols", true),
+    capitals: booleanProp("lesson.symbols.capitals", true),
+    progressive: booleanProp("lesson.symbols.progressive", true),
+  } as const,
   code: {
     syntax: itemProp("lesson.code.syntax", Syntax.ALL, Syntax.HTML),
     flags: flagsProp("lesson.code.flags", Syntax.FLAGS),

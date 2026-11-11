@@ -7,6 +7,7 @@ import {
   lessonProps,
   LessonType,
   type NumbersLesson,
+  type SymbolsLesson,
   type WordListLesson,
 } from "@keybr/lesson";
 import { LessonLoader } from "@keybr/lesson-loader";
@@ -21,6 +22,7 @@ import { DailyGoalSettings } from "./lesson/DailyGoalSettings.tsx";
 import { GuidedLessonSettings } from "./lesson/GuidedLessonSettings.tsx";
 import { LessonPreview } from "./lesson/LessonPreview.tsx";
 import { NumbersLessonSettings } from "./lesson/NumbersLessonSettings.tsx";
+import { SymbolsLessonSettings } from "./lesson/SymbolsLessonSettings.tsx";
 import { WordListLessonSettings } from "./lesson/WordListLessonSettings.tsx";
 
 export function LessonSettings(): ReactNode {
@@ -72,6 +74,12 @@ export function LessonSettings(): ReactNode {
             defaultMessage: "Numbers",
           })}
         />
+        <Tab
+          label={formatMessage({
+            id: "lessonType.symbols.label",
+            defaultMessage: "Symbols",
+          })}
+        />
       </TabList>
       <LessonLoader>
         {(lesson) => (
@@ -100,6 +108,8 @@ function tabBody(settings: Settings, lesson: Lesson): ReactNode {
       return <CodeLessonSettings lesson={lesson as CodeLesson} />;
     case LessonType.NUMBERS:
       return <NumbersLessonSettings lesson={lesson as NumbersLesson} />;
+    case LessonType.SYMBOLS:
+      return <SymbolsLessonSettings lesson={lesson as SymbolsLesson} />;
     default:
       throw new Error();
   }
