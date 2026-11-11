@@ -1,6 +1,6 @@
 # English
 
-Translated: 373 messages, 4897 words
+Translated: 377 messages, 4932 words
 
 Untranslated: 0 messages, 0 words
 
@@ -8,8 +8,9 @@ Untranslated: 0 messages, 0 words
 
 Translated: 339 messages, 4744 words
 
-Untranslated: 32 messages, 146 words
+Untranslated: 35 messages, 176 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -29,15 +30,15 @@ Untranslated: 32 messages, 146 words
 * *Most Errors*
 * *Combinations*
 * *Needs Review*
-* *Average Speed*
 * ...
 
 # Arabic
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -57,15 +58,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Bulgarian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -85,15 +86,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Bangla
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -113,15 +114,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Catalan
 
 Translated: 310 messages, 3556 words
 
-Untranslated: 59 messages, 1312 words
+Untranslated: 62 messages, 1342 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Errors*
@@ -141,16 +142,16 @@ Untranslated: 59 messages, 1312 words
 * *Most Errors*
 * *Combinations*
 * *Needs Review*
-* *Sound theme:*
 * ...
 
 # Czech
 
 Translated: 338 messages, 4742 words
 
-Untranslated: 33 messages, 148 words
+Untranslated: 36 messages, 178 words
 
 * *Font:*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -169,15 +170,15 @@ Untranslated: 33 messages, 148 words
 * *Most Errors*
 * *Combinations*
 * *Needs Review*
-* *Sound theme:*
 * ...
 
 # Danish
 
 Translated: 331 messages, 4689 words
 
-Untranslated: 38 messages, 179 words
+Untranslated: 41 messages, 209 words
 
+* *Retry*
 * *Score*
 * *Speed*
 * *Errors*
@@ -197,15 +198,15 @@ Untranslated: 38 messages, 179 words
 * *Practiced*
 * *Combination*
 * *Due Soonest*
-* *Most Errors*
 * ...
 
 # German
 
 Translated: 339 messages, 4744 words
 
-Untranslated: 32 messages, 146 words
+Untranslated: 35 messages, 176 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -225,15 +226,15 @@ Untranslated: 32 messages, 146 words
 * *Most Errors*
 * *Combinations*
 * *Needs Review*
-* *Average Speed*
 * ...
 
 # Greek
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -253,14 +254,13 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Esperanto
 
 Translated: 77 messages, 1126 words
 
-Untranslated: 287 messages, 3706 words
+Untranslated: 290 messages, 3736 words
 
 * *GO!*
 * *Copy*
@@ -272,6 +272,7 @@ Untranslated: 287 messages, 3706 words
 * *Close*
 * *Font:*
 * *Reset*
+* *Retry*
 * *Speed*
 * *Speed*
 * *Visit*
@@ -281,15 +282,15 @@ Untranslated: 287 messages, 3706 words
 * *Typing*
 * *Zones:*
 * *Due now*
-* *Fastest*
 * ...
 
 # Spanish
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -309,17 +310,17 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Estonian
 
 Translated: 338 messages, 4743 words
 
-Untranslated: 33 messages, 147 words
+Untranslated: 36 messages, 177 words
 
 * *GO!*
 * *Font:*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -337,16 +338,16 @@ Untranslated: 33 messages, 147 words
 * *Due Soonest*
 * *Most Errors*
 * *Combinations*
-* *Needs Review*
 * ...
 
 # Persian
 
 Translated: 295 messages, 2959 words
 
-Untranslated: 74 messages, 1909 words
+Untranslated: 77 messages, 1939 words
 
 * *Books*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -365,17 +366,17 @@ Untranslated: 74 messages, 1909 words
 * *Due Soonest*
 * *Most Errors*
 * *Combinations*
-* *Needs Review*
 * ...
 
 # Finnish
 
 Translated: 208 messages, 2284 words
 
-Untranslated: 157 messages, 2550 words
+Untranslated: 160 messages, 2580 words
 
 * *GO!*
 * *Time*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -393,14 +394,13 @@ Untranslated: 157 messages, 2550 words
 * *Practice*
 * *Schedule*
 * *Settings*
-* *Sort by:*
 * ...
 
 # Faroese
 
 Translated: 44 messages, 583 words
 
-Untranslated: 319 messages, 4238 words
+Untranslated: 322 messages, 4268 words
 
 * *GO!*
 * *Copy*
@@ -412,6 +412,7 @@ Untranslated: 319 messages, 4238 words
 * *Close*
 * *Font:*
 * *Reset*
+* *Retry*
 * *Speed*
 * *Speed*
 * *Speed*
@@ -421,15 +422,15 @@ Untranslated: 319 messages, 4238 words
 * *Layout*
 * *Review*
 * *Typing*
-* *Zones:*
 * ...
 
 # French
 
 Translated: 333 messages, 4544 words
 
-Untranslated: 38 messages, 346 words
+Untranslated: 41 messages, 376 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -449,15 +450,15 @@ Untranslated: 38 messages, 346 words
 * *Practiced*
 * *Combination*
 * *Due Soonest*
-* *Most Errors*
 * ...
 
 # Irish
 
 Translated: 337 messages, 4735 words
 
-Untranslated: 34 messages, 155 words
+Untranslated: 37 messages, 185 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -477,15 +478,15 @@ Untranslated: 34 messages, 155 words
 * *Smoothness:*
 * *Combinations*
 * *Needs Review*
-* *Sound theme:*
 * ...
 
 # Hebrew
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -505,17 +506,17 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Croatian
 
 Translated: 337 messages, 4740 words
 
-Untranslated: 34 messages, 150 words
+Untranslated: 37 messages, 180 words
 
 * *Font:*
 * *Reset*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -533,15 +534,15 @@ Untranslated: 34 messages, 150 words
 * *Most Errors*
 * *Multiplayer*
 * *Combinations*
-* *Needs Review*
 * ...
 
 # Hungarian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -561,16 +562,16 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Indonesian
 
 Translated: 339 messages, 4744 words
 
-Untranslated: 32 messages, 146 words
+Untranslated: 35 messages, 176 words
 
 * *GO!*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -589,14 +590,13 @@ Untranslated: 32 messages, 146 words
 * *Most Errors*
 * *Combinations*
 * *Needs Review*
-* *Average Speed*
 * ...
 
 # Icelandic
 
 Translated: 95 messages, 1742 words
 
-Untranslated: 269 messages, 3090 words
+Untranslated: 272 messages, 3120 words
 
 * *GO!*
 * *Copy*
@@ -609,6 +609,7 @@ Untranslated: 269 messages, 3090 words
 * *Font:*
 * *Reset*
 * *Retry*
+* *Retry*
 * *Speed*
 * *Speed*
 * *Visit*
@@ -617,16 +618,16 @@ Untranslated: 269 messages, 3090 words
 * *Review*
 * *Typing*
 * *Zones:*
-* *Account*
 * ...
 
 # Italian
 
 Translated: 334 messages, 4738 words
 
-Untranslated: 36 messages, 150 words
+Untranslated: 39 messages, 180 words
 
 * *Font:*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Layout*
@@ -645,15 +646,15 @@ Untranslated: 36 messages, 150 words
 * *Sort by:*
 * *Practiced*
 * *Combination*
-* *Due Soonest*
 * ...
 
 # Japanese
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -673,14 +674,13 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Korean
 
 Translated: 145 messages, 1297 words
 
-Untranslated: 224 messages, 3571 words
+Untranslated: 227 messages, 3601 words
 
 * *Copy*
 * *Done*
@@ -689,6 +689,7 @@ Untranslated: 224 messages, 3571 words
 * *Close*
 * *Font:*
 * *Reset*
+* *Retry*
 * *Speed*
 * *Visit*
 * *Errors*
@@ -701,15 +702,15 @@ Untranslated: 224 messages, 3571 words
 * *Mastery*
 * *Not set*
 * *Options*
-* *Preview*
 * ...
 
 # Lithuanian
 
 Translated: 305 messages, 3388 words
 
-Untranslated: 63 messages, 1471 words
+Untranslated: 66 messages, 1501 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -729,14 +730,13 @@ Untranslated: 63 messages, 1471 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Mongolian
 
 Translated: 16 messages, 378 words
 
-Untranslated: 345 messages, 4414 words
+Untranslated: 348 messages, 4444 words
 
 * *GO!*
 * *Copy*
@@ -750,6 +750,7 @@ Untranslated: 345 messages, 4414 words
 * *Font:*
 * *Reset*
 * *Retry*
+* *Retry*
 * *Score*
 * *Speed*
 * *Speed*
@@ -757,19 +758,19 @@ Untranslated: 345 messages, 4414 words
 * *Visit*
 * *Digits*
 * *Errors*
-* *Errors*
 * ...
 
 # Norwegian Bokmål
 
 Translated: 211 messages, 2446 words
 
-Untranslated: 155 messages, 2391 words
+Untranslated: 158 messages, 2421 words
 
 * *Done*
 * *Help*
 * *Books*
 * *Font:*
+* *Retry*
 * *Speed*
 * *Speed*
 * *Errors*
@@ -785,15 +786,15 @@ Untranslated: 155 messages, 2391 words
 * *Schedule*
 * *Settings*
 * *Sort by:*
-* *Alphabet:*
 * ...
 
 # Nepali
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -813,15 +814,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Dutch
 
 Translated: 333 messages, 4736 words
 
-Untranslated: 37 messages, 152 words
+Untranslated: 40 messages, 182 words
 
+* *Retry*
 * *Score*
 * *Speed*
 * *Errors*
@@ -841,15 +842,15 @@ Untranslated: 37 messages, 152 words
 * *Practiced*
 * *Combination*
 * *Due Soonest*
-* *Most Errors*
 * ...
 
 # Polish
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -869,15 +870,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Brazilian Portuguese
 
 Translated: 338 messages, 4743 words
 
-Untranslated: 33 messages, 147 words
+Untranslated: 36 messages, 177 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Layout*
@@ -897,16 +898,16 @@ Untranslated: 33 messages, 147 words
 * *Due Soonest*
 * *Most Errors*
 * *Combinations*
-* *Needs Review*
 * ...
 
 # European Portuguese
 
 Translated: 319 messages, 4618 words
 
-Untranslated: 50 messages, 250 words
+Untranslated: 53 messages, 280 words
 
 * *Books*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Layout*
@@ -925,16 +926,16 @@ Untranslated: 50 messages, 250 words
 * *Sort by:*
 * *Practiced*
 * *Top score!*
-* *Top speed!*
 * ...
 
 # Romanian
 
 Translated: 298 messages, 3587 words
 
-Untranslated: 66 messages, 1259 words
+Untranslated: 69 messages, 1289 words
 
 * *Font:*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Layout*
@@ -953,15 +954,15 @@ Untranslated: 66 messages, 1259 words
 * *Sort by:*
 * *Practiced*
 * *Translate*
-* *Combination*
 * ...
 
 # Russian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -981,15 +982,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Slovak
 
 Translated: 340 messages, 4745 words
 
-Untranslated: 31 messages, 145 words
+Untranslated: 34 messages, 175 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1009,16 +1010,16 @@ Untranslated: 31 messages, 145 words
 * *Combinations*
 * *Needs Review*
 * *Average Speed*
-* *Most Practiced*
 * ...
 
 # Slovenian
 
 Translated: 340 messages, 4745 words
 
-Untranslated: 31 messages, 145 words
+Untranslated: 34 messages, 175 words
 
 * *Font:*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1037,15 +1038,15 @@ Untranslated: 31 messages, 145 words
 * *Combinations*
 * *Needs Review*
 * *Average Speed*
-* *Most Practiced*
 * ...
 
 # Albanian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1065,15 +1066,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Swedish
 
 Translated: 338 messages, 4743 words
 
-Untranslated: 33 messages, 147 words
+Untranslated: 36 messages, 177 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Layout*
@@ -1093,15 +1094,15 @@ Untranslated: 33 messages, 147 words
 * *Due Soonest*
 * *Most Errors*
 * *Combinations*
-* *Needs Review*
 * ...
 
 # Thai
 
 Translated: 329 messages, 4635 words
 
-Untranslated: 40 messages, 233 words
+Untranslated: 43 messages, 263 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1121,17 +1122,17 @@ Untranslated: 40 messages, 233 words
 * *Combinations*
 * *Needs Review*
 * *Sound theme:*
-* *Top accuracy*
 * ...
 
 # Turkish
 
 Translated: 227 messages, 2126 words
 
-Untranslated: 139 messages, 2709 words
+Untranslated: 142 messages, 2739 words
 
 * *Books*
 * *Font:*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1149,15 +1150,15 @@ Untranslated: 139 messages, 2709 words
 * *Schedule*
 * *Sort by:*
 * *Alphabet:*
-* *Practiced*
 * ...
 
 # Ukrainian
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1177,15 +1178,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Vietnamese
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1205,15 +1206,15 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Simplified Chinese
 
 Translated: 340 messages, 4739 words
 
-Untranslated: 31 messages, 151 words
+Untranslated: 34 messages, 181 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1233,15 +1234,15 @@ Untranslated: 31 messages, 151 words
 * *Needs Review*
 * *Average Speed*
 * *M|T|W|T|F|S|S*
-* *Most Practiced*
 * ...
 
 # Traditional Chinese
 
 Translated: 341 messages, 4746 words
 
-Untranslated: 30 messages, 144 words
+Untranslated: 33 messages, 174 words
 
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1261,16 +1262,16 @@ Untranslated: 30 messages, 144 words
 * *Needs Review*
 * *Average Speed*
 * *Most Practiced*
-* *Key sounds only*
 * ...
 
 # Chinese (Taiwan)
 
 Translated: 340 messages, 4745 words
 
-Untranslated: 31 messages, 145 words
+Untranslated: 34 messages, 175 words
 
 * *GO!*
+* *Retry*
 * *Speed*
 * *Errors*
 * *Review*
@@ -1289,5 +1290,4 @@ Untranslated: 31 messages, 145 words
 * *Combinations*
 * *Needs Review*
 * *Average Speed*
-* *Most Practiced*
 * ...
