@@ -16,6 +16,7 @@ import {
 } from "@keybr/widget";
 import { type ReactNode } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import { AdaptivePracticeProp } from "./AdaptivePracticeProp.tsx";
 import { LessonLengthProp } from "./LessonLengthProp.tsx";
 import { RepeatWordsProp } from "./RepeatWordsProp.tsx";
 import { TargetSpeedProp } from "./TargetSpeedProp.tsx";
@@ -46,6 +47,7 @@ export function WordListLessonSettings({
         <WordListPreview lesson={lesson} />
         <WordListStats lesson={lesson} />
         <TargetSpeedProp />
+        <AdaptivePracticeProp prop={lessonProps.wordList.adaptivePractice} />
         <RepeatWordsProp />
         <TextManglingProp />
         <LessonLengthProp />

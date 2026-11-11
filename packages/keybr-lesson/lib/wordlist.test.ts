@@ -177,3 +177,47 @@ describe("generate randomized text using settings", () => {
     );
   });
 });
+
+test("adaptive review takes words with difficult combinations", () => {
+  const keyboard = loadKeyboard(Layout.EN_US);
+  const model = new FakePhoneticModel();
+  const wordList = ["abc", "bcd", "cde", "def", "efg", "gfe", "ghij"];
+  const count = (text: string) =>
+    text.split(" ").filter((word) => word === "ghij").length;
+
+  const lesson = new WordListLesson(new Settings(), keyboard, model, wordList);
+  const lessonKeys = lesson.update(makeKeyStatsMap(lesson.letters, []));
+  deepEqual(lesson.reviewTargets, []);
+  lesson.adaptivePractice!.record(
+    [..."ghij ghij ghij"].map((c, index) => ({
+      codePoint: c.codePointAt(0)!,
+      timeStamp: index * 100,
+      timeToType: 100,
+      typo: c === "h",
+    })),
+    200,
+  );
+  const text = String(lesson.generate(lessonKeys, model.rng));
+  deepEqual(lesson.reviewTargets, [
+    { kind: "pattern", text: "gh" },
+    { kind: "word", text: "ghij" },
+    { kind: "pattern", text: "hi" },
+    { kind: "pattern", text: "ghi" },
+    { kind: "pattern", text: "hij" },
+  ]);
+
+  const disabled = new WordListLesson(
+    new Settings().set(lessonProps.wordList.adaptivePractice, false),
+    keyboard,
+    model,
+    wordList,
+  );
+  isNull(disabled.adaptivePractice);
+  const plain = String(disabled.generate(lessonKeys, model.rng));
+  deepEqual(disabled.reviewTargets, []);
+
+  // The only word with the targets takes every fourth selection.
+  const words = text.split(" ").length;
+  equal(count(text) >= Math.floor(words / 4), true);
+  equal(count(text) > count(plain), true);
+});

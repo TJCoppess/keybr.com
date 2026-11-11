@@ -1,6 +1,10 @@
 import { describe, it, test } from "node:test";
 import { Layout, loadKeyboard } from "@keybr/keyboard";
-import { FakePhoneticModel, type Filter } from "@keybr/phonetic-model";
+import {
+  FakePhoneticModel,
+  type Filter,
+  type Letter,
+} from "@keybr/phonetic-model";
 import { makeKeyStatsMap } from "@keybr/result";
 import { Settings } from "@keybr/settings";
 import { deepEqual, equal, includes } from "rich-assert";
@@ -767,4 +771,54 @@ describe("unlock keys", () => {
       });
     });
   });
+});
+
+test("inaccurate keys hold back new keys and get the focus", () => {
+  const keyboard = loadKeyboard(Layout.EN_US);
+  const model = new FakePhoneticModel();
+  const sample = (missCount: number) => ({
+    index: 0,
+    timeStamp: 0,
+    hitCount: 20,
+    missCount,
+    timeToType: 100,
+    filteredTimeToType: 100,
+  });
+  // The first six keys are fast, but the third one is typed with mistakes.
+  const statsOf = (settings: Settings) => {
+    const map = fakeKeyStatsMap(
+      settings,
+      FakePhoneticModel.letters.map((letter, index) =>
+        index < 6 ? [letter, 1.5, 1.5] : [letter, null, null],
+      ),
+    );
+    return {
+      ...map,
+      get: (letter: Letter) =>
+        letter === FakePhoneticModel.letter3
+          ? { ...map.get(letter), samples: [sample(5)] }
+          : { ...map.get(letter), samples: [sample(0)] },
+      [Symbol.iterator]: () => map[Symbol.iterator](),
+    };
+  };
+
+  for (const recoverKeys of [false, true]) {
+    const settings = new Settings().set(
+      lessonProps.guided.recoverKeys,
+      recoverKeys,
+    );
+
+    const gated = new GuidedLesson(settings, keyboard, model, []);
+    const gatedKeys = gated.update(statsOf(settings));
+    equal(gatedKeys.findIncludedKeys().length, 6);
+    equal(gatedKeys.findFocusedKey()?.letter, FakePhoneticModel.letter3);
+    equal(gatedKeys.findFocusedKey()?.accuracy, 0.75);
+
+    const free = settings.set(lessonProps.guided.accuracyGate, false);
+    const freeKeys = new GuidedLesson(free, keyboard, model, []).update(
+      statsOf(free),
+    );
+    equal(freeKeys.findIncludedKeys().length, 7);
+    equal(freeKeys.findFocusedKey()?.letter, FakePhoneticModel.letter7);
+  }
 });

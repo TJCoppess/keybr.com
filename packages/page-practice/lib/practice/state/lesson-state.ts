@@ -1,5 +1,6 @@
 import { keyboardProps, type KeyId } from "@keybr/keyboard";
 import {
+  type AdaptiveTarget,
   type DailyGoal,
   Lesson,
   type LessonKeys,
@@ -46,6 +47,8 @@ export class LessonState {
 
   lastLesson: LastLesson | null = null;
 
+  /** What the current text was generated to review. */
+  reviewTargets: readonly AdaptiveTarget[] = []; // Mutable.
   textInput!: TextInput; // Mutable.
   lines!: LineList; // Mutable.
   suffix!: readonly CodePoint[]; // Mutable.
@@ -72,7 +75,7 @@ export class LessonState {
     if (this.lesson.adaptivePractice != null) {
       this.lesson.adaptivePractice = adaptiveStorage.load(this.settings);
     }
-    this.#reset(this.lesson.generate(this.lessonKeys, Lesson.rng));
+    this.#generate();
   }
 
   resetLesson() {
@@ -80,7 +83,7 @@ export class LessonState {
   }
 
   skipLesson() {
-    this.#reset(this.lesson.generate(this.lessonKeys, Lesson.rng));
+    this.#generate();
   }
 
   onInput(event: IInputEvent): Feedback {
@@ -97,12 +100,22 @@ export class LessonState {
             codePoint: this.textInput.at(index).codePoint,
           })),
           60000 / this.settings.get(lessonProps.targetSpeed),
+          Date.now(),
+          {
+            confusions: this.textInput.confusions,
+            reviewed: this.reviewTargets,
+          },
         );
         this.adaptiveStorage.save(this.settings, adaptivePractice);
       }
       this.#onResult(result, this.textInput);
     }
     return feedback;
+  }
+
+  #generate() {
+    this.#reset(this.lesson.generate(this.lessonKeys, Lesson.rng));
+    this.reviewTargets = this.lesson.reviewTargets;
   }
 
   #reset(fragment: StyledText) {

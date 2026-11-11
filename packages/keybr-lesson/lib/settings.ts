@@ -14,6 +14,7 @@ export const lessonProps = {
   length: numberProp("lesson.length", 0, { min: 0, max: 1 }),
   guided: {
     adaptivePractice: booleanProp("lesson.guided.adaptivePractice", true),
+    accuracyGate: booleanProp("lesson.guided.accuracyGate", true),
     naturalWords: booleanProp("lesson.guided.naturalWords", true),
     keyboardOrder: booleanProp("lesson.guided.keyboardOrder", false),
     alphabetSize: numberProp("lesson.guided.alphabetSize", 0, {
@@ -28,6 +29,7 @@ export const lessonProps = {
       max: 1000,
     }),
     longWordsOnly: booleanProp("lesson.wordList.longWordsOnly", false),
+    adaptivePractice: booleanProp("lesson.wordList.adaptivePractice", true),
   } as const,
   books: {
     book: itemProp("lesson.books.book", Book.ALL, Book.EN_ALICE_WONDERLAND),

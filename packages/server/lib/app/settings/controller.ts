@@ -32,7 +32,8 @@ export class Controller {
   async putAdaptive(
     ctx: Context<RouterState & AuthState>,
     @pathParam("layout") layout: string,
-    @body.json(null, { maxLength: 262144 }) value: unknown,
+    // Up to 1000 combinations, 500 words and 200 confusions.
+    @body.json(null, { maxLength: 1048576 }) value: unknown,
   ) {
     const user = ctx.state.requireUser();
     checkLayout(layout);

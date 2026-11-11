@@ -14,7 +14,7 @@ test("adaptive history requires login and is isolated by account and layout", as
   const request = startApp(context.get(Application, kMain));
   const path = "/_/sync/adaptive/en-colemak-dh";
   const history = {
-    version: 2,
+    version: 3,
     lesson: 3,
     patterns: [
       {
@@ -26,8 +26,31 @@ test("adaptive history requires login and is isolated by account and layout", as
         streak: 0,
         due: 4,
         dueAt: 1000,
+        best: 110,
+        stale: 2,
+        first: 150,
+        reviews: 1,
+        reviewedFrom: 140,
       },
     ],
+    words: [
+      {
+        text: "then",
+        samples: 3,
+        time: 130,
+        errors: 0,
+        errorRate: 0,
+        streak: 1,
+        due: 5,
+        dueAt: 2000,
+        best: 130,
+        stale: 0,
+        first: 130,
+        reviews: 0,
+        reviewedFrom: 0,
+      },
+    ],
+    confusions: [{ expected: "e", typed: "r", count: 3, lesson: 2 }],
   };
   equal((await request.GET(path).send()).status, 403);
   equal((await request.PUT(path).send(history)).status, 403);
@@ -55,7 +78,7 @@ test("adaptive history is validated and converted to the current version", async
   await request.become("user1@keybr.com");
   for (const invalid of [
     [],
-    { version: 3, lesson: 1, patterns: [] },
+    { version: 4, lesson: 1, patterns: [] },
     { version: 2, lesson: 1.5, patterns: [] },
     { version: 2, lesson: 1 },
   ]) {
@@ -77,13 +100,22 @@ test("adaptive history is validated and converted to the current version", async
     ).status,
     204,
   );
+  const progress = {
+    best: 120,
+    stale: 0,
+    first: 120,
+    reviews: 0,
+    reviewedFrom: 0,
+  };
   deepEqual(await (await request.GET(path).send()).body.json(), {
-    version: 2,
+    version: 3,
     lesson: 3,
     patterns: [
-      { ...pattern, text: "th", errors: 2, errorRate: 1 },
-      { ...pattern, text: "in", errors: 0, errorRate: 0 },
+      { ...pattern, ...progress, text: "th", errors: 2, errorRate: 1 },
+      { ...pattern, ...progress, text: "in", errors: 0, errorRate: 0 },
     ],
+    words: [],
+    confusions: [],
   });
 });
 

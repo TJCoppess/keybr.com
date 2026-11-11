@@ -13,6 +13,7 @@ export class LessonKey implements KeyStats {
       bestTimeToType,
       confidence: target.confidence(timeToType),
       bestConfidence: target.confidence(bestTimeToType),
+      accuracy: recentAccuracy(samples),
     });
   }
 
@@ -22,6 +23,11 @@ export class LessonKey implements KeyStats {
   readonly bestTimeToType: number | null;
   readonly confidence: number | null;
   readonly bestConfidence: number | null;
+  /**
+   * The share of correct hits in the most recent lessons, in range [0, 1],
+   * or `null` if the key was not typed enough.
+   */
+  readonly accuracy: number | null;
   readonly isIncluded: boolean;
   readonly isFocused: boolean;
   readonly isForced: boolean;
@@ -33,6 +39,7 @@ export class LessonKey implements KeyStats {
     bestTimeToType,
     confidence,
     bestConfidence,
+    accuracy = null,
     isIncluded = false,
     isFocused = false,
     isForced = false,
@@ -43,6 +50,7 @@ export class LessonKey implements KeyStats {
     bestTimeToType: number | null;
     confidence: number | null;
     bestConfidence: number | null;
+    accuracy?: number | null;
     isIncluded?: boolean;
     isFocused?: boolean;
     isForced?: boolean;
@@ -53,6 +61,7 @@ export class LessonKey implements KeyStats {
     this.bestTimeToType = bestTimeToType;
     this.confidence = confidence;
     this.bestConfidence = bestConfidence;
+    this.accuracy = accuracy;
     this.isIncluded = isIncluded;
     this.isFocused = isFocused;
     this.isForced = isForced;
@@ -90,6 +99,24 @@ export class LessonKey implements KeyStats {
       isFocused: true,
     });
   }
+}
+
+/**
+ * Returns the share of correct hits of a key in the most recent lessons
+ * in which the key was typed, or `null` if it was not typed enough.
+ */
+export function recentAccuracy(
+  samples: readonly KeySample[],
+  lessons: number = 5,
+  minHitCount: number = 10,
+): number | null {
+  let hitCount = 0;
+  let missCount = 0;
+  for (const sample of samples.slice(-lessons)) {
+    hitCount += sample.hitCount;
+    missCount += sample.missCount;
+  }
+  return hitCount >= minHitCount ? 1 - missCount / hitCount : null;
 }
 
 export class LessonKeys implements Iterable<LessonKey> {

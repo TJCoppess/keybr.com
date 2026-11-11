@@ -9,6 +9,7 @@ import { type KeyStatsMap, type Result, ResultGroups } from "@keybr/result";
 import { type Settings } from "@keybr/settings";
 import { type StyledText } from "@keybr/textinput";
 import { type AdaptivePractice } from "./adaptive.ts";
+import { type AdaptiveTarget } from "./adaptive-history.ts";
 import { type LessonKeys } from "./key.ts";
 
 export abstract class Lesson {
@@ -24,6 +25,8 @@ export abstract class Lesson {
    * a history start with an empty one, to be replaced with the stored one.
    */
   adaptivePractice: AdaptivePractice | null = null;
+  /** What the most recently generated text was made to review. */
+  reviewTargets: readonly AdaptiveTarget[] = [];
 
   protected constructor(
     settings: Settings,

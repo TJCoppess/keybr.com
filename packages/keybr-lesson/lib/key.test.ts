@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import { FakePhoneticModel } from "@keybr/phonetic-model";
-import { deepEqual } from "rich-assert";
-import { LessonKey, LessonKeys } from "./key.ts";
+import { deepEqual, equal } from "rich-assert";
+import { LessonKey, LessonKeys, recentAccuracy } from "./key.ts";
 
 const { letter1, letter2, letter3 } = FakePhoneticModel;
 
@@ -130,5 +130,32 @@ test("mutate lesson keys", () => {
       isForced: false,
       isFocused: true,
     }),
+  );
+});
+
+test("recent accuracy", () => {
+  const sample = (hitCount: number, missCount: number) => ({
+    index: 0,
+    timeStamp: 0,
+    hitCount,
+    missCount,
+    timeToType: 100,
+    filteredTimeToType: 100,
+  });
+  equal(recentAccuracy([]), null);
+  equal(recentAccuracy([sample(9, 9)]), null);
+  equal(recentAccuracy([sample(10, 0)]), 1);
+  equal(recentAccuracy([sample(10, 1), sample(10, 3)]), 0.8);
+  // Only the most recent lessons count.
+  equal(
+    recentAccuracy([
+      sample(10, 10),
+      sample(10, 0),
+      sample(10, 0),
+      sample(10, 0),
+      sample(10, 0),
+      sample(10, 5),
+    ]),
+    0.9,
   );
 });

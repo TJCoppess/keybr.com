@@ -1,4 +1,5 @@
 import {
+  type AdaptiveTarget,
   type DailyGoal as DailyGoalType,
   type LessonKey,
   type LessonKeys,
@@ -149,6 +150,39 @@ export const DailyGoalRow = memo(function DailyGoalRow({
         className={styles.value}
         dailyGoal={dailyGoal}
       />
+    </div>
+  );
+});
+
+export const ReviewTargetsRow = memo(function ReviewTargetsRow({
+  targets,
+}: {
+  targets: readonly AdaptiveTarget[];
+}) {
+  const { formatMessage } = useIntl();
+  return (
+    <div className={styles.row}>
+      <Name
+        className={styles.name}
+        name={formatMessage({
+          id: "t_Review",
+          defaultMessage: "Review",
+        })}
+      />
+      <span
+        className={styles.value}
+        title={formatMessage({
+          id: "lesson.indicator.review.description",
+          defaultMessage:
+            "Every fourth word of this lesson was chosen to review these letter combinations and words, and these pairs of letters which you type one for another.",
+        })}
+      >
+        {targets.map(({ kind, text }) => (
+          <span key={`${kind}:${text}`} className={styles.target}>
+            {kind === "confusion" ? [...text].join("\u2009\u2194\u2009") : text}
+          </span>
+        ))}
+      </span>
     </div>
   );
 });

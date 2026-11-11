@@ -2,6 +2,7 @@ import { type GuidedLesson } from "@keybr/lesson";
 import { Description, Explainer, FieldSet } from "@keybr/widget";
 import { type ReactNode } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import { AccuracyGateProp } from "./AccuracyGateProp.tsx";
 import { AdaptivePracticeProp } from "./AdaptivePracticeProp.tsx";
 import { AlphabetSizeProp } from "./AlphabetSizeProp.tsx";
 import { KeyboardOrderProp } from "./KeyboardOrderProp.tsx";
@@ -36,6 +37,7 @@ export function GuidedLessonSettings({
       >
         <TargetSpeedProp />
         <RecoverKeysProp />
+        <AccuracyGateProp />
         <AdaptivePracticeProp />
         <KeyboardOrderProp />
         <NaturalWordsProp />

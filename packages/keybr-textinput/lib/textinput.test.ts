@@ -643,3 +643,30 @@ function showChars({ chars }: TextInput) {
     })
     .join("|");
 }
+
+test("remember the characters typed by mistake", () => {
+  const textInput = new TextInput("abcd", {
+    stopOnError: true,
+    forgiveErrors: false,
+    spaceSkipsWords: false,
+  });
+
+  textInput.appendChar(100, /* "x" */ 0x0078, 100);
+  textInput.appendChar(200, /* "y" */ 0x0079, 100);
+  textInput.appendChar(300, /* "a" */ 0x0061, 100);
+  textInput.appendChar(400, /* "b" */ 0x0062, 100);
+  // The next character typed too early is not a confusion.
+  textInput.appendChar(500, /* "d" */ 0x0064, 100);
+  textInput.appendChar(600, /* "c" */ 0x0063, 100);
+  textInput.appendChar(700, /* "a" */ 0x0061, 100);
+  textInput.appendChar(800, /* "d" */ 0x0064, 100);
+
+  equal(textInput.completed, true);
+  deepEqual(textInput.confusions, [
+    { expected: /* "a" */ 0x0061, typed: /* "x" */ 0x0078 },
+    { expected: /* "d" */ 0x0064, typed: /* "a" */ 0x0061 },
+  ]);
+
+  textInput.reset();
+  deepEqual(textInput.confusions, []);
+});

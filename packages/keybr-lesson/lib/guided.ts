@@ -8,7 +8,9 @@ import {
   AdaptivePractice,
   adaptiveWords,
   findGeneratedWord,
+  matchesAdaptiveTarget,
 } from "./adaptive.ts";
+import { type AdaptiveTarget } from "./adaptive-history.ts";
 import { Dictionary, filterWordList } from "./dictionary.ts";
 import { LessonKey, LessonKeys } from "./key.ts";
 import { Lesson } from "./lesson.ts";
@@ -21,6 +23,9 @@ import {
   randomWords,
   uniqueWords,
 } from "./text/words.ts";
+
+/** A key typed with a lower accuracy must be practiced more. */
+const minKeyAccuracy = 0.9;
 
 export class GuidedLesson extends Lesson {
   readonly dictionary: Dictionary;
@@ -49,6 +54,11 @@ export class GuidedLesson extends Lesson {
   override update(keyStatsMap: KeyStatsMap) {
     const alphabetSize = this.settings.get(lessonProps.guided.alphabetSize);
     const recoverKeys = this.settings.get(lessonProps.guided.recoverKeys);
+    const accuracyGate = this.settings.get(lessonProps.guided.accuracyGate);
+
+    // A key which is typed fast but with many mistakes is not learned yet.
+    const isAccurate = ({ accuracy }: LessonKey): boolean =>
+      !accuracyGate || accuracy == null || accuracy >= minKeyAccuracy;
 
     const letters = this.#getLetters();
 
@@ -84,16 +94,24 @@ export class GuidedLesson extends Lesson {
       }
 
       if (recoverKeys) {
-        if (includedKeys.every((key) => (key.confidence ?? 0) >= 1)) {
+        if (
+          includedKeys.every(
+            (key) => (key.confidence ?? 0) >= 1 && isAccurate(key),
+          )
+        ) {
           // Include a new key only when all the previous keys
-          // are now above the target speed.
+          // are now above the target speed and are typed accurately.
           lessonKeys.include(lessonKey.letter);
           continue;
         }
       } else {
-        if (includedKeys.every((key) => (key.bestConfidence ?? 0) >= 1)) {
+        if (
+          includedKeys.every(
+            (key) => (key.bestConfidence ?? 0) >= 1 && isAccurate(key),
+          )
+        ) {
           // Include a new key only when all the previous keys
-          // were once above the target speed.
+          // were once above the target speed and are typed accurately.
           lessonKeys.include(lessonKey.letter);
           continue;
         }
@@ -110,6 +128,15 @@ export class GuidedLesson extends Lesson {
       .sort((a, b) => confidenceOf(a) - confidenceOf(b));
     if (weakestKeys.length > 0) {
       lessonKeys.focus(weakestKeys[0].letter);
+    } else {
+      // All keys are fast enough, so focus on the least accurate one.
+      const inaccurateKeys = lessonKeys
+        .findIncludedKeys()
+        .filter((key) => !isAccurate(key))
+        .sort((a, b) => (a.accuracy ?? 1) - (b.accuracy ?? 1));
+      if (inaccurateKeys.length > 0) {
+        lessonKeys.focus(inaccurateKeys[0].letter);
+      }
     }
 
     return lessonKeys;
@@ -122,12 +149,13 @@ export class GuidedLesson extends Lesson {
     );
     const normal = this.#makeWordGenerator(filter, rng);
     const targets =
-      this.adaptivePractice?.targets(
+      this.adaptivePractice?.reviewTargets(
         new Set(
           lessonKeys.findIncludedKeys().map(({ letter }) => letter.codePoint),
         ),
         60000 / this.settings.get(lessonProps.targetSpeed),
       ) ?? [];
+    this.reviewTargets = targets;
     const wordGenerator =
       targets.length === 0
         ? normal
@@ -160,7 +188,7 @@ export class GuidedLesson extends Lesson {
   }
 
   /**
-   * Makes a function which finds a word with the given letter combination,
+   * Makes a function which finds a word for the given review target,
    * made only of the included keys.
    */
   #makeWordFinder(lessonKeys: LessonKeys, rng: RNGStream) {
@@ -169,13 +197,13 @@ export class GuidedLesson extends Lesson {
     const naturalWords = this.settings.get(lessonProps.guided.naturalWords)
       ? this.dictionary.find(filter)
       : [];
-    const matches = new Map<string, readonly string[]>();
-    return (target: string): string | null => {
+    const matches = new Map<AdaptiveTarget, readonly string[]>();
+    return (target: AdaptiveTarget): string | null => {
       let words = matches.get(target);
       if (words == null) {
         // The dictionary is ordered from the most to the least common words.
         words = naturalWords
-          .filter((word) => word.includes(target))
+          .filter((word) => matchesAdaptiveTarget(word, target))
           .slice(0, 100);
         matches.set(target, words);
       }

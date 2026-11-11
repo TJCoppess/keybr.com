@@ -25,6 +25,12 @@ export type Step = {
 
 export type StepListener = (step: Step) => void;
 
+/** A character which was typed instead of the expected one. */
+export type Confusion = {
+  readonly expected: CodePoint;
+  readonly typed: CodePoint;
+};
+
 const recoverBufferLength = 3;
 const garbageBufferLength = 10;
 
@@ -38,6 +44,7 @@ export class TextInput {
   readonly #chars: readonly Char[];
   #steps: (Step & { readonly char: Char })[] = [];
   #garbage: (Step & { readonly char: Char })[] = [];
+  #confusions: Confusion[] = [];
   #typo!: boolean;
   #output!: { chars: Char[]; lines: LineList; remaining: Char[] };
 
@@ -59,6 +66,7 @@ export class TextInput {
   reset(): void {
     this.#steps = [];
     this.#garbage = [];
+    this.#confusions = [];
     this.#typo = false;
     this.#update();
   }
@@ -81,6 +89,14 @@ export class TextInput {
 
   get steps(): readonly Step[] {
     return this.#steps;
+  }
+
+  /**
+   * The first wrong character typed at each position where a typo was made.
+   * A character typed too early, in place of the one before it, is omitted.
+   */
+  get confusions(): readonly Confusion[] {
+    return this.#confusions;
   }
 
   get chars(): readonly Char[] {
@@ -186,6 +202,13 @@ export class TextInput {
       }
     }
 
+    if (
+      !this.#typo &&
+      (this.pos + 1 >= this.length ||
+        this.at(this.pos + 1).codePoint !== codePoint)
+    ) {
+      this.#confusions.push({ expected, typed: codePoint });
+    }
     this.#typo = true;
     if (!this.stopOnError || this.forgiveErrors) {
       if (this.#garbage.length < garbageBufferLength) {
