@@ -1,10 +1,13 @@
-import { basename, extname, join } from "node:path";
+import { basename, extname, posix } from "node:path";
 import webpack from "webpack";
 
 const {
   Compilation,
   sources: { RawSource },
 } = webpack;
+
+// Manifest entries are browser URLs, even when building on Windows.
+const { join } = posix;
 
 export class ManifestPlugin {
   static serialize({ entrypoints, assets }) {

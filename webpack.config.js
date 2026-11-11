@@ -121,16 +121,16 @@ export default [
         rule_js(),
         rule_less(false),
         {
-          test: /\/assets\//,
+          test: /[\\/]assets[\\/]/,
           use: "null-loader",
         },
         {
-          test: /\/knex\/lib\/dialects\//,
-          exclude: /\/mysql|sqlite3|better-sqlite3\//,
+          test: /[\\/]knex[\\/]lib[\\/]dialects[\\/]/,
+          exclude: /[\\/](mysql|sqlite3|better-sqlite3)[\\/]/,
           use: "null-loader",
         },
         {
-          test: /\/knex\/lib\/migrations\//,
+          test: /[\\/]knex[\\/]lib[\\/]migrations[\\/]/,
           use: "null-loader",
         },
       ],
@@ -179,7 +179,7 @@ export default [
         rule_js(),
         rule_less(true),
         {
-          test: /\/assets\//,
+          test: /[\\/]assets[\\/]/,
           type: "asset/resource",
         },
       ],
@@ -194,12 +194,12 @@ export default [
             name: "shared-vendor",
           },
           widget: {
-            test: /\/keybr-widget\//,
+            test: /[\\/]keybr-widget[\\/]/,
             chunks: "all",
             name: "shared-widget",
           },
           keyboard: {
-            test: /\/keybr-keyboard\//,
+            test: /[\\/]keybr-keyboard[\\/]/,
             chunks: "all",
             name: "shared-keyboard",
           },

@@ -19,6 +19,15 @@ But the devil is in the details — keybr.com offers a few unique features:
 * It provides a beautiful profile page with detailed graphs showing your learning progress.
 * It offers plenty of modes and configuration options.
 
+## Run locally on Windows
+
+Install [Node.js 24](https://nodejs.org/), then double-click `run-keybr.cmd`.
+The launcher installs any missing dependencies, builds the application, prepares the
+local database, and serves it at [http://localhost:3000/](http://localhost:3000/).
+Keep the launcher window open while using the app; press `Ctrl+C` to stop it.
+After changing source code, run `run-keybr.cmd rebuild` from Command Prompt to
+compile the changes before starting the app.
+
 <p align="center">
     <img src="docs/assets/graph.png" alt="screenshot" width="600"/>
 </p>
